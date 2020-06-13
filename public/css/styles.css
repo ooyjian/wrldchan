@@ -1,3 +1,19 @@
+h1 {
+    color: #eeeeee;
+    font-size: 64px;
+}
+
 body {
     font-family: arial;
+    background-color: #363636;
+    margin: 0 auto;
+    padding: 0 16px;
+
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.main-content {
+    flex-grow: 1;
 }
