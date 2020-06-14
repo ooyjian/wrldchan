@@ -18,6 +18,7 @@
   "homepage": "https://github.com/ooyjian/wrldchan#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "hbs": "^4.1.1"
+    "hbs": "^4.1.1",
+    "mongodb": "^3.5.9"
   }
 }
