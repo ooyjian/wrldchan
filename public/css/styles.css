@@ -8,6 +8,7 @@ header {
 }
 
 a {
+    padding: 0 8px;
     color: #292929;
     text-decoration: none;
     font-family: Verdana;
@@ -29,6 +30,11 @@ h1 {
     font-size: 48px;
 }
 
+p {
+    color: #eeeeee;
+    font-family: Arial;
+}
+
 #userInput {
     border: transparent;
     background-color: #292929;
@@ -48,4 +54,10 @@ input[name="submitBtn"] {
 
 .main-content {
     flex-grow: 1;
+}
+
+.replies {
+    padding: 10px 16px;
+    margin-right: 16px;
+    background-color: #292929;
 }
