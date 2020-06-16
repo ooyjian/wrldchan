@@ -9,11 +9,14 @@
     <body>
 
         <div class='main-content'>
+            {{>header}}
             <h1>Labbayka</h1>
 
-            <form>
-                <textarea id="userInput"></textarea>
-                <button id="submitBtn">Submit</button>
+            <form action="" method="post" name="textIn">
+                <div class='input'>
+                    <textarea id="userInput" name="userInput"></textarea>
+                </div>
+                <input type="submit" name="submitBtn" value="Submit">
             </form>
         </div>
 
