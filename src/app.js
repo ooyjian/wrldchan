@@ -2,8 +2,10 @@ const express = require('express')
 const path = require('path')
 const hbs = require('hbs')
 var bodyParser = require('body-parser');
-const mongoose = require('mongoose');
 const { rawListeners } = require('process');
+const Reply = require('./models/reply')
+
+require('./db/mongoose')
 
 const app = express()
 const publicDirPath = path.join(__dirname, '../public')
@@ -20,6 +22,9 @@ var reply = ''
 
 app.post('', (req, res) => {
     reply = req.body.userInput
+    const newReply = new Reply({
+        description: req.body.userInput
+    })
     return res.redirect('/replies')
 })
 
@@ -34,10 +39,14 @@ app.get('/coms', (req, res) => {
 })
 
 app.get('/replies', (req, res) => {
+    const reply = Reply.find({}).map((x) => {
+        console.log(x.description)
+        x = x.description
+    })
     res.render('replies', {
         title: "Replies", 
-        reply
+        reply: Reply.find({})
     })
 })
 
-app.listen(5000, () => console.log("App Running on Port 5000"))
+app.listen(5000, () => console.log("Connected to wrldchan.org!"))
