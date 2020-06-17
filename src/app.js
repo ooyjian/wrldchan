@@ -42,6 +42,16 @@ app.post("/deleteallreplies", (req, res) => {
     return res.redirect('/replies')
 })
 
+app.post("/deletereply/:id", (req, res) => {
+    const _timestamp = req.params.id
+    Reply.deleteOne({ time: _timestamp }).then((result) => {
+        console.log("Successfully delete this reply")
+    }).catch((error) => {
+        console.log("Unable to delete reply")
+    })
+    return res.redirect('/replies')
+})
+
 app.get('', (req, res) => {
     res.render('index', {
         title: "( ͡◉ ͜ʖ ͡◉)"
@@ -54,9 +64,6 @@ app.get('/coms', (req, res) => {
 
 app.get('/replies', (req, res) => {
     Reply.find({time: {$gte: new Date().getTime()-86400000}}).then((result) => {
-        for (var i = 0; i < result.length; i++) {
-            result[i] = result[i].description
-        }
         res.render('replies', {
             title: "Replies", 
             reply: result
