@@ -48,10 +48,9 @@ app.get('/replies', (req, res) => {
         for (var i = 0; i < result.length; i++) {
             result[i] = result[i].description
         }
-        console.log(result.toString())
         res.render('replies', {
             title: "Replies", 
-            reply: result.toString()
+            reply: result
         })
     }).catch((error) => {
         console.log(error)

@@ -2,8 +2,6 @@ function addReply(replies) {
     
     console.log(replies)
     replies = replies.split(",");
-    console.log(replies)
-    console.log(replies.length)
 
     for (var i = 0; i < replies.length; i++) {
         console.log(replies[i]);
@@ -16,4 +14,5 @@ function addReply(replies) {
 
 
 const replies = document.currentScript.getAttribute('replies');
+console.log(replies)
 addReply(replies);

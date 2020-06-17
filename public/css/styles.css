@@ -56,6 +56,7 @@ input[name="submitBtn"] {
 }
 
 .replies {
+    border: 2px solid white;
     padding: 10px 16px;
     margin-right: 16px;
     background-color: #292929;
