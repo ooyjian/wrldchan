@@ -3,7 +3,8 @@ const mongoose = require('mongoose')
 const Reply = new mongoose.model('Reply', {
     description: {
         type: String, 
-        required: true
+        required: true, 
+        trim: false
     }, 
     time: {
         type: Number,

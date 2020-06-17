@@ -51,13 +51,18 @@ input[name="submitBtn"] {
     color: #292929;
 }
 
-.main-content {
-    flex-grow: 1;
+#reply-box {
+    border: 2px solid #eeeeee;
+    background-color: #292929;
+    display: block;
+    margin: 5px 0;
+    padding-left: 10px;
 }
 
-.replies {
-    border: 2px solid white;
-    padding: 10px 16px;
-    margin-right: 16px;
-    background-color: #292929;
+#reply {
+    white-space: pre-wrap;
+}
+
+.main-content {
+    flex-grow: 1;
 }

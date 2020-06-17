@@ -9,10 +9,12 @@
 
     <body>
         {{>header}}
-        <div id="main-content">
-            <p>{{reply}}</p>
-            <script src="/js/replies.js" replies={{reply}}></script>
-        </div>
+        <div style="padding: 5px;"></div>
+        {{#each reply}}
+            <div id="reply-box">
+                <p id="reply">{{this}}</p>
+            </div>
+        {{/each}}
     </body>
 
 </html>
