@@ -8,13 +8,18 @@
     </head>
 
     <body>
-        {{>header}}
-        <div style="padding: 5px;"></div>
-        {{#each reply}}
-            <div id="reply-box">
-                <p id="reply">{{this}}</p>
-            </div>
-        {{/each}}
+        <div class='main-content'>
+            {{>header}}
+            <div style="padding: 5px;"></div>
+            {{#each reply}}
+                <div id="reply-box">
+                    <p id="reply">{{this}}</p>
+                </div>
+            {{/each}}
+        </div>
+        <form action="/deleteallreplies" method="POST">
+            <input type="submit" name="deleteBtn" value="Delete All Replies">
+        </form>
     </body>
 
 </html>

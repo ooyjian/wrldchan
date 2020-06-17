@@ -33,6 +33,15 @@ app.post('', (req, res) => {
     return res.redirect('/replies')
 })
 
+app.post("/deleteallreplies", (req, res) => {
+    Reply.deleteMany({}).then(() => {
+        console.log("Successfully deleted all replies")
+    }).catch(() => {
+        console.log("Unable to delete all replies")
+    })
+    return res.redirect('/replies')
+})
+
 app.get('', (req, res) => {
     res.render('index', {
         title: "( ͡◉ ͜ʖ ͡◉)"
@@ -44,7 +53,7 @@ app.get('/coms', (req, res) => {
 })
 
 app.get('/replies', (req, res) => {
-    Reply.find({}).then((result) => {
+    Reply.find({time: {$gte: new Date().getTime()-86400000}}).then((result) => {
         for (var i = 0; i < result.length; i++) {
             result[i] = result[i].description
         }
