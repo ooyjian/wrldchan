@@ -48,10 +48,8 @@ app.post("/deleteallreplies", (req, res) => {
 })
 
 app.post("/deletereply/:id", (req, res) => {
-    const _timestamp = req.params.id
-    console.log(_timestamp)
-    Reply.deleteOne({ time: _timestamp }).then((result) => {
-        console.log(result)
+    const id = req.params.id
+    Reply.deleteOne({ _id: id }).then((result) => {
         console.log("Successfully delete this reply")
     }).catch((error) => {
         console.log("Unable to delete reply")

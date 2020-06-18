@@ -14,7 +14,7 @@
             {{#each reply}}
                 <div id="reply-box">
                     <p id="reply">{{this.description}}</p>
-                    <form action="/deletereply/{{this.time}}" method="POST">
+                    <form action="/deletereply/{{this._id}}" method="POST">
                         <input type="submit" class="deleteBtn" value="Delete">
                     </form>
                 </div>
