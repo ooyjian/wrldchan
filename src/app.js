@@ -20,6 +20,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 hbs.registerPartials(partialsDirPath)
 
 
+app.post('/login', (req, res) => {
+    const username = req.body.username
+    const password = req.body.password
+})
+
 app.post('', (req, res) => {
     const newReply = new Reply({
         description: req.body.userInput
@@ -44,7 +49,9 @@ app.post("/deleteallreplies", (req, res) => {
 
 app.post("/deletereply/:id", (req, res) => {
     const _timestamp = req.params.id
+    console.log(_timestamp)
     Reply.deleteOne({ time: _timestamp }).then((result) => {
+        console.log(result)
         console.log("Successfully delete this reply")
     }).catch((error) => {
         console.log("Unable to delete reply")

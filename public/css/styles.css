@@ -21,6 +21,7 @@ body {
 
     display: flex;
     flex-direction: column;
+    justify-content: center;
     min-height: 100vh;
 }
 
@@ -71,5 +72,13 @@ input[name="submitBtn"] {
 }
 
 .main-content {
+    justify-content: center;
     flex-grow: 1;
+}
+
+.deleteBtn {
+    border: none;
+    color: #bdbdbd;
+    background-color: #363636;
+    margin-bottom: 5px;
 }
