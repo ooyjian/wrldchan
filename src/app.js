@@ -3,10 +3,14 @@ const path = require('path')
 const hbs = require('hbs')
 const bodyParser = require('body-parser');
 const { rawListeners } = require('process');
+const {ObjectId} = require('mongodb');
 
 require('./db/mongoose')
 
 const Reply = require('./models/reply')
+
+
+///////////////////////// Start of the actual code ////////////////////////////////////////
 
 const app = express()
 const publicDirPath = path.join(__dirname, '../public')
@@ -19,6 +23,7 @@ app.use(express.static(publicDirPath))
 app.use(bodyParser.urlencoded({ extended: true })); 
 hbs.registerPartials(partialsDirPath)
 
+/////////////////////// Post Request Below //////////////////////////////////////////////
 
 app.post('/login', (req, res) => {
     const username = req.body.username
@@ -57,9 +62,28 @@ app.post("/deletereply/:id", (req, res) => {
     return res.redirect('/replies')
 })
 
+app.post("/replyreply/:id", (req, res) => {
+    console.log(req.body)
+    const newReply = new Reply({
+        description: req.body.replyArea, 
+        parent_id: ObjectId(req.params.id)
+    })
+    
+    newReply.save().then((result) => {
+        console.log(result)
+    }).catch((error) => {
+        console.log("Unable to save reply")
+        console.log(error)
+    })
+    return res.redirect('/replies')
+})
+
+
+//////////////////////////// GET Request Below /////////////////////////////////////
+
 app.get('', (req, res) => {
     res.render('index', {
-        title: "( ͡◉ ͜ʖ ͡◉)"
+        title: "wrldchan"
     })
 })
 

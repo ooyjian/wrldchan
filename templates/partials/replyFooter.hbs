@@ -1,0 +1,12 @@
+<form action="/deletereply/{{this._id}}" method="POST">
+    <input type="submit" class="deleteBtn" value="Delete">
+</form>
+
+<form action="/replyreply/{{this._id}}" method="POST">
+    <input type="button" class="deleteBtn" value="Reply" onclick="reply()">
+
+    <div id="replyArea" name="replyArea" style="display: none;">
+        <textarea class="reply-area" name="replyArea"></textarea>
+        <input type="submit" value="Submit">
+    </div>
+</form>

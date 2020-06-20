@@ -5,6 +5,7 @@
     <head>
         <link rel="stylesheet" href="/css/styles.css">
         <title>{{title}}</title>
+        <script src="/js/reply.js"></script>
     </head>
 
     <body>
@@ -12,15 +13,9 @@
             {{>header}}
             <div style="padding: 5px;"></div>
             {{#each reply}}
-                <div id="reply-box">
+                <div class="reply-box">
                     <p id="reply">{{this.description}}</p>
-                    <form action="/deletereply/{{this._id}}" method="POST">
-                        <input type="submit" class="deleteBtn" value="Delete">
-                    </form>
-
-                    <form action="/replyreply/{{this._id}}" method="POST">
-                        <input type="submit" class="deleteBtn" value="Reply">
-                    </form>
+                    {{>replyFooter}}
                 </div>
             {{/each}}
         </div>

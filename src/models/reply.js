@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const { ObjectID, ObjectId } = require('mongodb')
 
 const Reply = new mongoose.model('Reply', {
     description: {
@@ -9,6 +10,10 @@ const Reply = new mongoose.model('Reply', {
     time: {
         type: Number,
         default: new Date().getTime()
+    },
+    parent_id: {
+        type: ObjectId, 
+        default: null
     }
 })
 
