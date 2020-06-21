@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const { ObjectID, ObjectId } = require('mongodb')
+const { ObjectId } = require('mongodb')
 
 const Reply = new mongoose.model('Reply', {
     description: {

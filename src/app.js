@@ -9,6 +9,7 @@ require('./db/mongoose')
 
 const Reply = require('./models/reply')
 
+const addReply = require('./helpers/reply')
 
 ///////////////////////// Start of the actual code ////////////////////////////////////////
 
@@ -22,6 +23,7 @@ app.set('views', viewsDirPath)
 app.use(express.static(publicDirPath))
 app.use(bodyParser.urlencoded({ extended: true })); 
 hbs.registerPartials(partialsDirPath)
+hbs.registerHelper('addReply', addReply)
 
 /////////////////////// Post Request Below //////////////////////////////////////////////
 
