@@ -55,7 +55,7 @@ app.post("/deleteallreplies", (req, res) => {
 })
 
 app.post("/deletereply/:id", (req, res) => {
-    const id = req.params.id
+    const id = ObjectId(req.params.id)
     Reply.deleteOne({ _id: id }).then((result) => {
         console.log("Successfully delete this reply")
     }).catch((error) => {

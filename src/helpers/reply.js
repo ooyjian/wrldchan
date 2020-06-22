@@ -33,7 +33,7 @@ function dfs(stack, rest, options, reply_box) {
     
     var parent_reply = stack.pop();
     const prev_id = parent_reply._id;
-    return_html += "<div class=\"" + reply_box + "\">\n" + "<p id=\"reply\">" + parent_reply.description + "</p>\n" + options.fn(prev_id) + "\n";
+    return_html += "<div class=\"" + reply_box + "\">\n" + "<p id=\"reply\">" + parent_reply.description + "</p>\n" + options.fn(prev_id.toString()) + "\n";
 
     for (var i = 0; i < rest.length; i++) {
         if (rest[i].parent_id.toString() === prev_id.toString()) {
