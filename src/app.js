@@ -92,6 +92,12 @@ app.get('/coms', (req, res) => {
     res.render('coms')
 })
 
+app.get('/b/random', (req, res) => {
+    res.render('random', {
+        title: "/random"
+    })
+})
+
 app.get('/replies', (req, res) => {
     Reply.find({time: {$gte: new Date().getTime()-86400000}}).then((result) => {        
         res.render('replies', {
