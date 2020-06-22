@@ -77,12 +77,26 @@ input[name="submitBtn"] {
     font-size: 10px;
 }
 
-.reply-box {
+.reply-box-1 {
     border: 2px solid #eeeeee;
     background-color: #292929;
     display: block;
     margin: 5px 0;
+    margin-right: 5px;
     padding-left: 10px;
+}
+
+.reply-box-2 {
+    border: 2px solid #eeeeee;
+    background-color: #363636;
+    display: block;
+    margin: 5px 0;
+    margin-right: 5px;
+    padding-left: 10px;
+}
+
+.reply-footer {
+    margin-top: 10px;
 }
 
 

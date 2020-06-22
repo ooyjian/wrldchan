@@ -12,13 +12,9 @@
         <div class='main-content'>
             {{>header}}
             <div style="padding: 5px;"></div>
-            {{#each reply}}
-                <div class="reply-box">
-                    <p>{{addReply this.parent_id}}</p>
-                    <p id="reply">{{this.description}}</p>
-                    {{>replyFooter}}
-                </div>
-            {{/each}}
+            {{#addReply reply}}
+                {{>replyFooter}}
+            {{/addReply}}
         </div>
 
         <form action="/deleteallreplies" method="POST">

@@ -65,14 +65,13 @@ app.post("/deletereply/:id", (req, res) => {
 })
 
 app.post("/replyreply/:id", (req, res) => {
-    console.log(req.body)
     const newReply = new Reply({
         description: req.body.replyArea, 
         parent_id: ObjectId(req.params.id)
     })
     
     newReply.save().then((result) => {
-        console.log(result)
+        // console.log(result.description)
     }).catch((error) => {
         console.log("Unable to save reply")
         console.log(error)
@@ -94,7 +93,7 @@ app.get('/coms', (req, res) => {
 })
 
 app.get('/replies', (req, res) => {
-    Reply.find({time: {$gte: new Date().getTime()-86400000}}).then((result) => {
+    Reply.find({time: {$gte: new Date().getTime()-86400000}}).then((result) => {        
         res.render('replies', {
             title: "Replies", 
             reply: result
