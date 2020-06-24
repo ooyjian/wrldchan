@@ -104,7 +104,7 @@ app.post('/submitpost', (req, res) => {
         console.log("Unable to add post")
     })
 
-    res.redirect('/b/' + board)
+    res.redirect('/b/' + board + "/" + newPost._id)
 
 })
 
