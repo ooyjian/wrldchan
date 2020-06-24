@@ -16,6 +16,7 @@ a {
 body {
     font-family: arial;
     background-color: #363636;
+    color: #eeeeee;
     margin: 0 auto;
     padding: 0 16px;
 
@@ -46,7 +47,7 @@ footer {
     border-top: 1px solid #bdbdbd;
 }
 
-#userInput {
+textarea {
     border: transparent;
     background-color: #292929;
     color: #eeeeee;
@@ -64,15 +65,10 @@ input[name="submitBtn"] {
 }
 
 
-.main-content {
-    justify-content: center;
-    flex-grow: 1;
-}
-
 .deleteBtn {
     border: none;
     color: #bdbdbd;
-    background-color: #363636;
+    background-color: #4c4c4c;
     margin-bottom: 5px;
     font-size: 10px;
 }
@@ -125,6 +121,39 @@ input[name="submitBtn"] {
     padding: auto;
 }
 
+.post-block {
+    border: 2px solid #eeeeee;
+    background-color: #292929;
+    display: block;
+    padding: 10px;
+}
+
+/* Below are the classes */
+
+
+#main-content {
+    justify-content: center;
+    flex-grow: 1;
+}
+
 #reply {
     white-space: pre-wrap;
+}
+
+#posttitle {
+    border: none;
+    margin-bottom: 10px;
+    font-size: 16px;
+    padding: 5px;
+    background-color: #292929;
+    color: #eeeeee;
+}
+
+.post-block {
+    border: 2px solid #eeeeee;
+    background-color: #292929;
+    display: block;
+    margin: 5px 0;
+    margin-right: 5px;
+    padding-left: 10px;
 }

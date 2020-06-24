@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+
+        <link rel="stylesheet" href="/css/styles.css">
+        <title>Submit Post</title>
+
+    </head>
+
+    <body>
+        {{>header}}
+        <div id="main-content" style="margin-left: 100px; margin-top: 50px;">
+            
+
+            <form action="/submitpost?b={{board}}" method="POST" style="font-size: 16px;">
+                <label for="posttitle">Title: </label> <br>
+                <input type="text" id="posttitle" name="posttitle" size="82"><br>
+                <label for="postcontent">Content: </label><br>
+                <textarea type="text" id="postcontent" name="postcontent"></textarea><br>
+
+                <input type="submit" class="deleteBtn" name="submitPostBtn" value="Submit">
+            </form>
+        </div>
+        {{>footer}}
+    </body>
+
+</html>

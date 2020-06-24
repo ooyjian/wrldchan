@@ -7,11 +7,11 @@ const {ObjectId} = require('mongodb');
 
 require('./db/mongoose')
 
-const { Reply, replySchema } = require('./models/reply')
+const { Reply } = require('./models/reply')
 
 const addReply = require('./helpers/reply');
 const mongoose = require('mongoose');
-const reply = require('./models/reply');
+const Post = require('./models/post');
 
 ///////////////////////// Start of the actual code ////////////////////////////////////////
 
@@ -27,9 +27,8 @@ app.use(bodyParser.urlencoded({ extended: true }))
 hbs.registerPartials(partialsDirPath)
 hbs.registerHelper('addReply', addReply)
 
-/////////////////////// Post Request Below //////////////////////////////////////////////
 
-const ReplyRandom = new mongoose.model('ReplyRandom', replySchema)
+/////////////////////// Post Request Below //////////////////////////////////////////////
 
 app.post('/login', (req, res) => {
     const username = req.body.username
@@ -83,6 +82,28 @@ app.post("/replyreply/:id", (req, res) => {
     return res.redirect('/replies')
 })
 
+app.post('/submitpost', (req, res) => {
+    const board = req.query.b
+    const title = req.body.posttitle
+    const content = req.body.postcontent
+    
+    const newPostRandom = new Post({
+        title,
+        content, 
+        board
+    })
+    
+    newPostRandom.save().then((result) => {
+        console.log(result)
+        console.log("Post added successfully")
+    }).catch((error) => {
+        console.log(error);
+        console.log("Unable to add post")
+    })
+
+    res.redirect('/b/' + board)
+
+})
 
 //////////////////////////// GET Request Below /////////////////////////////////////
 
@@ -97,13 +118,24 @@ app.get('/coms', (req, res) => {
 })
 
 app.get('/b/random', (req, res) => {
-    res.render('random', {
-        title: "/random"
+
+    Post.find({ board: 'random' }).then((result) => {
+        res.render('random', {
+            title: "/random",
+            posts: result
+        })
+    }).catch((error) => {
+        console.log(error)
+        console.log("Unable to load page")
     })
+    
 })
 
-app.get('/submitpost', (req, res) => {
-    
+app.get("/submitpost", (req, res) => {
+    const board = req.query.b
+    res.render('submitpost', {
+        board
+    })
 })
 
 app.get('/replies', (req, res) => {

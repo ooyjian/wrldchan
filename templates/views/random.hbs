@@ -8,12 +8,17 @@
     </head>
 
     <body>
-        <div class="main-content">
+        <div id="main-content">
             {{>header}}
             <div style="text-align: center;">
-                <a class="new-post" href="">{MAKE A NEW POST}</a>
+                <a class="new-post" href="/submitpost?b=random">{MAKE A NEW POST}</a>
             </div>
             
+            {{#each posts}}
+                <div class="post-block">
+                    <a href="/b/random?post={{this._id}}">{{this.title}}</a>
+                </div>
+            {{/each}}
         </div>
 
         {{>footer}}

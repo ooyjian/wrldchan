@@ -15,23 +15,13 @@ const replySchema = new Schema({
     parent_id: {
         type: ObjectId, 
         default: null
-    }
-})
-
-const Reply = new mongoose.model('Reply', {
-    description: {
-        type: String, 
-        required: true, 
-        trim: false
     }, 
-    time: {
-        type: Number,
-        default: new Date().getTime()
-    },
-    parent_id: {
+    post_id: {
         type: ObjectId, 
         default: null
     }
 })
+
+const Reply = new mongoose.model('Reply', replySchema)
 
 module.exports = {Reply: Reply, replySchema: replySchema}
