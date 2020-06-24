@@ -186,15 +186,15 @@ app.get("/submitpost", (req, res) => {
     })
 })
 
-app.get('/replies', (req, res) => {
-    Reply.find({time: {$gte: new Date().getTime()-86400000}}).then((result) => {        
-        res.render('replies', {
-            title: "Replies", 
-            reply: result
-        })
-    }).catch((error) => {
-        console.log(error)
-    })
-})
+// app.get('/replies', (req, res) => {
+//     Reply.find({time: {$gte: new Date().getTime()-86400000}}).then((result) => {        
+//         res.render('replies', {
+//             title: "Replies", 
+//             reply: result
+//         })
+//     }).catch((error) => {
+//         console.log(error)
+//     })
+// })
 
 app.listen(5000, () => console.log("Connected to wrldchan.org!"))
