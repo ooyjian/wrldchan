@@ -6,3 +6,12 @@ function reply(input_id) {
         texta.style.display = "none"
     }
 }
+
+function op_reply() {
+    var texta = document.getElementById("op-reply")
+    if (texta.style.display == "none") {
+        texta.style.display = "block"
+    } else {
+        texta.style.display = "none"
+    }
+}

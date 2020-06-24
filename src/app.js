@@ -68,18 +68,21 @@ app.post("/deletereply/:id", (req, res) => {
 })
 
 app.post("/replyreply/:id", (req, res) => {
-    const newReply = new Reply({
-        description: req.body.replyArea, 
-        parent_id: ObjectId(req.params.id)
+    Reply.findById(req.params.id).then((result) => {
+        const newReply = new Reply({
+            description: req.body.replyArea, 
+            parent_id: ObjectId(req.params.id),
+            post_id: result.post_id
+        })
+        
+        newReply.save().then((result) => {
+            // console.log(result.description)
+        }).catch((error) => {
+            console.log("Unable to save reply")
+            console.log(error)
+        })
+        return res.redirect('back')
     })
-    
-    newReply.save().then((result) => {
-        // console.log(result.description)
-    }).catch((error) => {
-        console.log("Unable to save reply")
-        console.log(error)
-    })
-    return res.redirect('/replies')
 })
 
 app.post('/submitpost', (req, res) => {
@@ -87,13 +90,13 @@ app.post('/submitpost', (req, res) => {
     const title = req.body.posttitle
     const content = req.body.postcontent
     
-    const newPostRandom = new Post({
+    const newPost = new Post({
         title,
         content, 
         board
     })
     
-    newPostRandom.save().then((result) => {
+    newPost.save().then((result) => {
         console.log(result)
         console.log("Post added successfully")
     }).catch((error) => {
@@ -103,6 +106,22 @@ app.post('/submitpost', (req, res) => {
 
     res.redirect('/b/' + board)
 
+})
+
+app.post('/b/random/:id', (req, res) => {
+    const post_id = req.params.id
+
+    const newReply = new Reply({
+        description: req.body.userInput,
+        post_id
+    })
+
+    newReply.save().then(() => {
+        console.log("Reply saved!")
+    }).catch((error) => {
+        console.log("Unable to save reply")
+    })
+    return res.redirect('back')
 })
 
 //////////////////////////// GET Request Below /////////////////////////////////////
@@ -129,6 +148,35 @@ app.get('/b/random', (req, res) => {
         console.log("Unable to load page")
     })
     
+})
+
+app.get('/b/random/:id', (req, res) => {
+    const post_id = req.params.id
+    const post = Post.findById(post_id).then((result) => {
+        console.log("Found a post")
+
+        const post_result = result;
+
+
+        Reply.find({ post_id }).then((result) => {
+            res.render('loadpost', {
+                title: post_result.title, 
+                content: post_result.content, 
+                reply: result,
+                post_id
+            })
+        }).catch((error) => {
+            console.log(error)
+            console.log("Unable to load post " + post_id)
+        })
+
+    }).catch((error) => {
+        console.log(error)
+        console.log("Unable to find post")
+    }) 
+
+    
+
 })
 
 app.get("/submitpost", (req, res) => {

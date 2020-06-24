@@ -10,13 +10,14 @@
     <body>
         <div id="main-content">
             {{>header}}
+            <div style="padding:5px"></div>
             <div style="text-align: center;">
                 <a class="new-post" href="/submitpost?b=random">{MAKE A NEW POST}</a>
             </div>
             
             {{#each posts}}
                 <div class="post-block">
-                    <a href="/b/random?post={{this._id}}">{{this.title}}</a>
+                    <a href="/b/random/{{this._id}}">{{this.title}}</a>
                 </div>
             {{/each}}
         </div>

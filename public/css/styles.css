@@ -121,14 +121,28 @@ input[name="submitBtn"] {
     padding: auto;
 }
 
+
 .post-block {
     border: 2px solid #eeeeee;
     background-color: #292929;
     display: block;
+    margin: 5px 0;
+    margin-right: 5px;
+    margin-top: 15px;
     padding: 10px;
 }
 
-/* Below are the classes */
+.post-content-block {
+    border: 2px solid #eeeeee;
+    background-color: #292929;
+    padding-left: 10px;
+    padding-bottom: 3px;
+    margin-top: 10px;
+    max-width: 800px;
+    margin-bottom: 15px;
+}
+
+/* Below are the id */
 
 
 #main-content {
@@ -149,11 +163,4 @@ input[name="submitBtn"] {
     color: #eeeeee;
 }
 
-.post-block {
-    border: 2px solid #eeeeee;
-    background-color: #292929;
-    display: block;
-    margin: 5px 0;
-    margin-right: 5px;
-    padding-left: 10px;
-}
+
