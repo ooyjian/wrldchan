@@ -20,14 +20,14 @@
                 {{#each pin}}
                     <div class="post-block">
                         <a style="color: #b92828;">{{this.title}}</a>
-                        <a href="/b/{{board}}/{{this._id}}" style="float:right">[View Comments]</a>
+                        <a class="view-comment-ref" href="/b/{{board}}/{{this._id}}">[View Comments]</a>
                     </div>
                 {{/each}}
                 
                 {{#each unpin}}
                     <div class="post-block">
                         <a>{{this.title}}</a>
-                        <a href="/b/{{board}}/{{this._id}}" style="float:right">[View Comments]</a>
+                        <a class="view-comment-ref" href="/b/{{board}}/{{this._id}}">[View Comments]</a>
                     </div>
                 {{/each}}
             </div>

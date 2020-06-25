@@ -97,7 +97,7 @@ input[name="submitBtn"] {
 
 .board-container {
     display: grid;
-    grid-template-columns: repeat(3, min-content);
+    grid-template-columns: repeat(4, min-content);
     grid-column-gap: 30px;
 }
 
@@ -121,6 +121,10 @@ input[name="submitBtn"] {
     padding: auto;
 }
 
+.new-post:hover {
+    color: #bdbdbd;
+}
+
 .post-area {
     margin-top: 30px;
 }
@@ -135,6 +139,14 @@ input[name="submitBtn"] {
     margin-right: auto;
     padding: 10px;
     width: 70%
+}
+
+.view-comment-ref {
+    float: right;
+}
+
+.view-comment-ref:hover {
+    color: #bdbdbd;
 }
 
 .post-content-block {
