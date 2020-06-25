@@ -15,3 +15,11 @@ function op_reply() {
         texta.style.display = "none"
     }
 }
+
+function input_func(texta) {
+    if (texta.style.display === "none") {
+        texta.style.display = "block"
+    } else {
+        texta.style.display = "none"
+    }
+}

@@ -98,7 +98,7 @@ input[name="submitBtn"] {
 .board-container {
     display: grid;
     grid-template-columns: repeat(4, min-content);
-    grid-column-gap: 30px;
+    grid-column-gap: 50px;
 }
 
 .board {

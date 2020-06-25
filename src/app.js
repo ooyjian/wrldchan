@@ -89,6 +89,8 @@ app.post('/submitpost', (req, res) => {
     const board = req.query.b
     const title = req.body.posttitle
     const content = req.body.postcontent
+
+    console.log(req.body)
     
     const newPost = new Post({
         title,
@@ -124,6 +126,39 @@ app.post('/b/random/:id', (req, res) => {
     return res.redirect('back')
 })
 
+app.post('/b/tech/:id', (req, res) => {
+    const post_id = req.params.id
+
+    const newReply = new Reply({
+        description: req.body.userInput,
+        post_id
+    })
+
+    newReply.save().then(() => {
+        console.log("Reply saved!")
+    }).catch((error) => {
+        console.log("Unable to save reply")
+    })
+    return res.redirect('back')
+})
+
+app.post('/b/fic/:id', (req, res) => {
+    const post_id = req.params.id
+
+    const newReply = new Reply({
+        description: req.body.userInput,
+        post_id
+    })
+
+    newReply.save().then(() => {
+        console.log("Reply saved!")
+    }).catch((error) => {
+        console.log("Unable to save reply")
+    })
+    return res.redirect('back')
+})
+
+
 //////////////////////////// GET Request Below /////////////////////////////////////
 
 app.get('', (req, res) => {
@@ -132,9 +167,7 @@ app.get('', (req, res) => {
     })
 })
 
-// app.get('/coms', (req, res) => {
-//     res.render('coms')
-// })
+///////////// The boards ////////////////////////////
 
 app.get('/b/random', (req, res) => {
 
@@ -157,9 +190,49 @@ app.get('/b/random', (req, res) => {
     
 })
 
+app.get('/b/tech', (req, res) => {
+
+    Post.find({ board: 'tech' , pin: false}).then((result) => {
+        const unpin_posts = result
+
+        Post.find({ board: 'tech' , pin: true }).then((result) => {
+            res.render('board', {
+                title: "/tech",
+                board: "tech",
+                pin: result,
+                unpin: unpin_posts
+            })
+        })
+   
+    }).catch((error) => {
+        console.log(error)
+        console.log("Unable to load page")
+    })
+})
+
+app.get('/b/fic', (req, res) => {
+
+    Post.find({ board: 'fic' , pin: false}).then((result) => {
+        const unpin_posts = result
+
+        Post.find({ board: 'fic' , pin: true }).then((result) => {
+            res.render('board', {
+                title: "/fiction",
+                board: "fic",
+                pin: result,
+                unpin: unpin_posts
+            })
+        })
+   
+    }).catch((error) => {
+        console.log(error)
+        console.log("Unable to load page")
+    })
+})
+
 app.get('/b/random/:id', (req, res) => {
     const post_id = req.params.id
-    const post = Post.findById(post_id).then((result) => {
+    Post.findById(post_id).then((result) => {
         console.log("Found a post")
 
         const post_result = result;
@@ -182,7 +255,59 @@ app.get('/b/random/:id', (req, res) => {
         console.log("Unable to find post")
     }) 
 
-    
+})
+
+app.get('/b/tech/:id', (req, res) => {
+    const post_id = req.params.id
+    Post.findById(post_id).then((result) => {
+        console.log("Found a post")
+
+        const post_result = result;
+
+
+        Reply.find({ post_id }).then((result) => {
+            res.render('loadpost', {
+                title: post_result.title, 
+                content: post_result.content, 
+                reply: result,
+                post_id
+            })
+        }).catch((error) => {
+            console.log(error)
+            console.log("Unable to load post " + post_id)
+        })
+
+    }).catch((error) => {
+        console.log(error)
+        console.log("Unable to find post")
+    }) 
+
+})
+
+app.get('/b/fic/:id', (req, res) => {
+    const post_id = req.params.id
+    Post.findById(post_id).then((result) => {
+        console.log("Found a post")
+
+        const post_result = result;
+
+
+        Reply.find({ post_id }).then((result) => {
+            res.render('loadpost', {
+                title: post_result.title, 
+                content: post_result.content, 
+                reply: result,
+                post_id
+            })
+        }).catch((error) => {
+            console.log(error)
+            console.log("Unable to load post " + post_id)
+        })
+
+    }).catch((error) => {
+        console.log(error)
+        console.log("Unable to find post")
+    }) 
 
 })
 
