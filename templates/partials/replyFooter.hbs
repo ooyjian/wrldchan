@@ -1,7 +1,7 @@
 <div class="reply-footer">
-    <form action="/deletereply/{{this}}" method="POST">
+    {{!-- <form action="/deletereply/{{this}}" method="POST">
         <input type="submit" class="deleteBtn" value="Delete">
-    </form>
+    </form> --}}
 
     <form action="/replyreply/{{this}}" method="POST">
         <input type="button" class="deleteBtn" value="Reply" id={{this}} onclick="reply(id)">
