@@ -158,6 +158,22 @@ app.post('/b/fic/:id', (req, res) => {
     return res.redirect('back')
 })
 
+app.post('/b/poli/:id', (req, res) => {
+    const post_id = req.params.id
+
+    const newReply = new Reply({
+        description: req.body.userInput,
+        post_id
+    })
+
+    newReply.save().then(() => {
+        console.log("Reply saved!")
+    }).catch((error) => {
+        console.log("Unable to save reply")
+    })
+    return res.redirect('back')
+})
+
 
 //////////////////////////// GET Request Below /////////////////////////////////////
 
@@ -230,6 +246,26 @@ app.get('/b/fic', (req, res) => {
     })
 })
 
+app.get('/b/poli', (req, res) => {
+
+    Post.find({ board: 'poli' , pin: false}).then((result) => {
+        const unpin_posts = result
+
+        Post.find({ board: 'poli' , pin: true }).then((result) => {
+            res.render('board', {
+                title: "/poli",
+                board: "poli",
+                pin: result,
+                unpin: unpin_posts
+            })
+        })
+   
+    }).catch((error) => {
+        console.log(error)
+        console.log("Unable to load page")
+    })
+})
+
 app.get('/b/random/:id', (req, res) => {
     const post_id = req.params.id
     Post.findById(post_id).then((result) => {
@@ -285,6 +321,33 @@ app.get('/b/tech/:id', (req, res) => {
 })
 
 app.get('/b/fic/:id', (req, res) => {
+    const post_id = req.params.id
+    Post.findById(post_id).then((result) => {
+        console.log("Found a post")
+
+        const post_result = result;
+
+
+        Reply.find({ post_id }).then((result) => {
+            res.render('loadpost', {
+                title: post_result.title, 
+                content: post_result.content, 
+                reply: result,
+                post_id
+            })
+        }).catch((error) => {
+            console.log(error)
+            console.log("Unable to load post " + post_id)
+        })
+
+    }).catch((error) => {
+        console.log(error)
+        console.log("Unable to find post")
+    }) 
+
+})
+
+app.get('/b/poli/:id', (req, res) => {
     const post_id = req.params.id
     Post.findById(post_id).then((result) => {
         console.log("Found a post")
