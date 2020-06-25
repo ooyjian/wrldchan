@@ -14,7 +14,7 @@
             <div class="post-content-block">
                 <h3>{{title}}</h3>
                 <HR style="FILTER: alpha(opacity=100,finishopacity=0,style=1)" width="60%" color="#ff9fb2" SIZE=3 align="left">
-                <p>{{content}}</p>
+                <p style="white-space: pre-wrap;">{{content}}</p>
                 <button onclick="op_reply()">Reply</button><br>
                 <form action="/b/random/{{post_id}}" id="op-reply" method="POST" style="display: none;">
                     <textarea class="reply-area" name="userInput" style="background-color: #363636;"></textarea>
