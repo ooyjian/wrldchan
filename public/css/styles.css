@@ -147,6 +147,16 @@ input[name="submitBtn"] {
     margin-bottom: 15px;
 }
 
+.announcement {
+    border: 2px solid #ff9fb2;
+    background-color: #4c4c4c;
+    width: 50%;
+    margin: 10px auto;
+    padding: 10px;
+    padding-bottom: 0px;
+    font-size: 12px;
+}
+
 /* Below are the id */
 
 
@@ -160,7 +170,7 @@ input[name="submitBtn"] {
     margin-left: auto;
     margin-right: auto;
     width: 50%;
-    margin-top: 100px;
+    margin-top: 50px;
 }
 
 #reply {
