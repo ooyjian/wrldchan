@@ -13,21 +13,21 @@
             {{>header}}
             <div style="padding:5px"></div>
             <div style="text-align: center;">
-                <a class="new-post" href="/submitpost?b=random">{MAKE A NEW POST}</a>
+                <a class="new-post" href="/submitpost?b={{board}}">{MAKE A NEW POST}</a>
             </div>
 
             <div class="post-area">
                 {{#each pin}}
                     <div class="post-block">
                         <a style="color: #b92828;">{{this.title}}</a>
-                        <a href="/b/random/{{this._id}}" style="float:right">[View Comments]</a>
+                        <a href="/b/{{board}}/{{this._id}}" style="float:right">[View Comments]</a>
                     </div>
                 {{/each}}
                 
                 {{#each unpin}}
                     <div class="post-block">
                         <a>{{this.title}}</a>
-                        <a href="/b/random/{{this._id}}" style="float:right">[View Comments]</a>
+                        <a href="/b/{{board}}/{{this._id}}" style="float:right">[View Comments]</a>
                     </div>
                 {{/each}}
             </div>

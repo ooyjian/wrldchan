@@ -142,8 +142,9 @@ app.get('/b/random', (req, res) => {
         const unpin_posts = result
 
         Post.find({ board: 'random' , pin: true }).then((result) => {
-            res.render('random', {
+            res.render('board', {
                 title: "/random",
+                board: "random",
                 pin: result,
                 unpin: unpin_posts
             })
