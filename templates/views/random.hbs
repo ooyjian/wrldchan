@@ -14,12 +14,20 @@
             <div style="text-align: center;">
                 <a class="new-post" href="/submitpost?b=random">{MAKE A NEW POST}</a>
             </div>
-            
-            {{#each posts}}
-                <div class="post-block">
-                    <a href="/b/random/{{this._id}}">{{this.title}}</a>
-                </div>
-            {{/each}}
+
+            <div class="post-area">
+                {{#each pin}}
+                    <div class="post-block">
+                        <a href="/b/random/{{this._id}}" style="color: #b92828;">{{this.title}}</a>
+                    </div>
+                {{/each}}
+                
+                {{#each unpin}}
+                    <div class="post-block">
+                        <a href="/b/random/{{this._id}}">{{this.title}}</a>
+                    </div>
+                {{/each}}
+            </div>
         </div>
 
         {{>footer}}

@@ -12,6 +12,10 @@ const postSchema = new mongoose.Schema({
     board: {
         type: String, 
         required: true
+    }, 
+    pin: {
+        type: Boolean, 
+        default: false
     }
 });
 

@@ -14,7 +14,7 @@ a {
 }
 
 body {
-    font-family: arial;
+    font-family: Verdana;
     background-color: #363636;
     color: #eeeeee;
     margin: 0 auto;
@@ -33,7 +33,7 @@ h1 {
 
 p {
     color: #eeeeee;
-    font-family: Arial;
+    font-family: Verdana;
 }
 
 form {
@@ -51,7 +51,7 @@ textarea {
     border: transparent;
     background-color: #292929;
     color: #eeeeee;
-    font-family: Arial;
+    font-family: Verdana;
     padding: 10px;
     width: 600px;
     height: 400px;
@@ -121,15 +121,19 @@ input[name="submitBtn"] {
     padding: auto;
 }
 
+.post-area {
+    margin-left: 30px;
+    margin-top: 30px;
+}
+
 
 .post-block {
-    border: 2px solid #eeeeee;
-    background-color: #292929;
+    border: none;
+    background-color: #4c4c4c;
     display: block;
-    margin: 5px 0;
-    margin-right: 5px;
-    margin-top: 15px;
+    margin-top: 10px;
     padding: 10px;
+    width: 70%
 }
 
 .post-content-block {

@@ -138,11 +138,17 @@ app.get('', (req, res) => {
 
 app.get('/b/random', (req, res) => {
 
-    Post.find({ board: 'random' }).then((result) => {
-        res.render('random', {
-            title: "/random",
-            posts: result
+    Post.find({ board: 'random' , pin: false}).then((result) => {
+        const unpin_posts = result
+
+        Post.find({ board: 'random' , pin: true }).then((result) => {
+            res.render('random', {
+                title: "/random",
+                pin: result,
+                unpin: unpin_posts
+            })
         })
+   
     }).catch((error) => {
         console.log(error)
         console.log("Unable to load page")
