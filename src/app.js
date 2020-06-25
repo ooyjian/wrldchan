@@ -128,7 +128,7 @@ app.post('/b/random/:id', (req, res) => {
 
 app.get('', (req, res) => {
     res.render('index', {
-        title: "wrldchan"
+        title: "WRLD"
     })
 })
 
