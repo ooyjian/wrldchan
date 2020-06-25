@@ -132,9 +132,9 @@ app.get('', (req, res) => {
     })
 })
 
-app.get('/coms', (req, res) => {
-    res.render('coms')
-})
+// app.get('/coms', (req, res) => {
+//     res.render('coms')
+// })
 
 app.get('/b/random', (req, res) => {
 
