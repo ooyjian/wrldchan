@@ -31,8 +31,8 @@ hbs.registerHelper('convertDate', convertDate)
 
 /* This function is used to sort the posts by their timestamp */
 function compareByTime(a, b) {
-    if (a.timestamp > b.timestamp) return 1;
-    if (a.timestamp < b.timestamp) return -1;
+    if (a.timestamp > b.timestamp) return -1;
+    if (a.timestamp < b.timestamp) return 1;
 
     return 0;
 }
