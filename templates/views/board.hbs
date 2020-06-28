@@ -20,6 +20,7 @@
                 {{#each pin}}
                     <div class="post-block">
                         <a style="color: #b92828;">{{this.title}}</a>
+                        <span class="timestamp">{{convertDate this.timestamp}}</span>
                         <a class="view-comment-ref" href="/b/{{board}}/{{this._id}}">[View Comments]</a>
                     </div>
                 {{/each}}
@@ -27,6 +28,7 @@
                 {{#each unpin}}
                     <div class="post-block">
                         <a>{{this.title}}</a>
+                        <span class="timestamp">{{convertDate this.timestamp}}</span>
                         <a class="view-comment-ref" href="/b/{{board}}/{{this._id}}">[View Comments]</a>
                     </div>
                 {{/each}}

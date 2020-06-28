@@ -169,6 +169,18 @@ input[name="submitBtn"] {
     font-size: 12px;
 }
 
+.timestamp {
+    font-size: 9px;
+    display: inline;
+}
+
+.timestamp-reply {
+    font-size: 9px;
+    float: right;
+    margin-right: 15px;
+}
+
+
 /* Below are the id */
 
 

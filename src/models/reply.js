@@ -10,7 +10,7 @@ const replySchema = new Schema({
     }, 
     time: {
         type: Number,
-        default: new Date().getTime()
+        required: true
     },
     parent_id: {
         type: ObjectId, 

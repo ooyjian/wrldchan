@@ -9,8 +9,7 @@ require('./db/mongoose')
 
 const { Reply } = require('./models/reply')
 
-const addReply = require('./helpers/reply');
-const mongoose = require('mongoose');
+const { addReply, convertDate } = require('./helpers/reply');
 const Post = require('./models/post');
 
 ///////////////////////// Start of the actual code ////////////////////////////////////////
@@ -26,7 +25,85 @@ app.use(express.static(publicDirPath))
 app.use(bodyParser.urlencoded({ extended: true }))
 hbs.registerPartials(partialsDirPath)
 hbs.registerHelper('addReply', addReply)
+hbs.registerHelper('convertDate', convertDate)
 
+/////////////////////// Helper functions here ///////////////////////////////////////////
+
+/* This function is used to sort the posts by their timestamp */
+function compareByTime(a, b) {
+    if (a.timestamp > b.timestamp) return 1;
+    if (a.timestamp < b.timestamp) return -1;
+
+    return 0;
+}
+
+function showBoard(req, res, board, title) {
+    Post.find({ board: board , pin: false}).then((result) => {
+        const unpin_posts = result
+
+        unpin_posts.sort(compareByTime)
+
+        console.log(unpin_posts);
+
+        Post.find({ board: 'random' , pin: true }).then((result) => {
+            res.render('board', {
+                title: title,
+                board: board,
+                pin: result,
+                unpin: unpin_posts
+            })
+        })
+   
+    }).catch((error) => {
+        console.log(error)
+        console.log("Unable to load page")
+    })
+}
+
+function loadPost(req, res) {
+    const post_id = req.params.id
+    Post.findById(post_id).then((result) => {
+
+        const post_result = result;
+
+
+        Reply.find({ post_id }).then((result) => {
+            res.render('loadpost', {
+                title: post_result.title, 
+                content: post_result.content, 
+                time: post_result.timestamp,
+                reply: result,
+                post_id
+            })
+        }).catch((error) => {
+            console.log(error)
+            console.log("Unable to load post " + post_id)
+        })
+
+    }).catch((error) => {
+        console.log(error)
+        console.log("Unable to find post")
+    }) 
+}
+
+function opReply(req, res) {
+    const post_id = req.params.id
+
+    const currentTime = new Date().getTime();
+
+    const newReply = new Reply({
+        description: req.body.userInput,
+        time: currentTime,
+        post_id
+    })
+
+    newReply.save().then(() => {
+        console.log("Reply saved!")
+    }).catch((error) => {
+        console.log("Unable to save reply")
+    })
+    return res.redirect('back')
+}
 
 /////////////////////// Post Request Below //////////////////////////////////////////////
 
@@ -68,9 +145,14 @@ app.post("/deletereply/:id", (req, res) => {
 })
 
 app.post("/replyreply/:id", (req, res) => {
-    Reply.findById(req.params.id).then((result) => {
+
+
+    Reply.findById(req.params.id).then((result) => {  
+        const currentTime = new Date().getTime()
+
         const newReply = new Reply({
             description: req.body.replyArea, 
+            time: currentTime,
             parent_id: ObjectId(req.params.id),
             post_id: result.post_id
         })
@@ -89,13 +171,15 @@ app.post('/submitpost', (req, res) => {
     const board = req.query.b
     const title = req.body.posttitle
     const content = req.body.postcontent
+    const currentTime = new Date().getTime();
 
     console.log(req.body)
     
     const newPost = new Post({
         title,
         content, 
-        board
+        board, 
+        timestamp: currentTime
     })
     
     newPost.save().then((result) => {
@@ -111,67 +195,19 @@ app.post('/submitpost', (req, res) => {
 })
 
 app.post('/b/random/:id', (req, res) => {
-    const post_id = req.params.id
-
-    const newReply = new Reply({
-        description: req.body.userInput,
-        post_id
-    })
-
-    newReply.save().then(() => {
-        console.log("Reply saved!")
-    }).catch((error) => {
-        console.log("Unable to save reply")
-    })
-    return res.redirect('back')
+    opReply(req, res);
 })
 
 app.post('/b/tech/:id', (req, res) => {
-    const post_id = req.params.id
-
-    const newReply = new Reply({
-        description: req.body.userInput,
-        post_id
-    })
-
-    newReply.save().then(() => {
-        console.log("Reply saved!")
-    }).catch((error) => {
-        console.log("Unable to save reply")
-    })
-    return res.redirect('back')
+    opReply(req, res);
 })
 
 app.post('/b/fic/:id', (req, res) => {
-    const post_id = req.params.id
-
-    const newReply = new Reply({
-        description: req.body.userInput,
-        post_id
-    })
-
-    newReply.save().then(() => {
-        console.log("Reply saved!")
-    }).catch((error) => {
-        console.log("Unable to save reply")
-    })
-    return res.redirect('back')
+    opReply(req, res);
 })
 
 app.post('/b/poli/:id', (req, res) => {
-    const post_id = req.params.id
-
-    const newReply = new Reply({
-        description: req.body.userInput,
-        post_id
-    })
-
-    newReply.save().then(() => {
-        console.log("Reply saved!")
-    }).catch((error) => {
-        console.log("Unable to save reply")
-    })
-    return res.redirect('back')
+    opReply(req, res);
 })
 
 
@@ -187,190 +223,49 @@ app.get('', (req, res) => {
 
 app.get('/b/random', (req, res) => {
 
-    Post.find({ board: 'random' , pin: false}).then((result) => {
-        const unpin_posts = result
-
-        Post.find({ board: 'random' , pin: true }).then((result) => {
-            res.render('board', {
-                title: "/random",
-                board: "random",
-                pin: result,
-                unpin: unpin_posts
-            })
-        })
-   
-    }).catch((error) => {
-        console.log(error)
-        console.log("Unable to load page")
-    })
+    showBoard(req, res, "random", "/random");
     
 })
 
 app.get('/b/tech', (req, res) => {
 
-    Post.find({ board: 'tech' , pin: false}).then((result) => {
-        const unpin_posts = result
+    showBoard(req, res, "tech", "/tech");
 
-        Post.find({ board: 'tech' , pin: true }).then((result) => {
-            res.render('board', {
-                title: "/tech",
-                board: "tech",
-                pin: result,
-                unpin: unpin_posts
-            })
-        })
-   
-    }).catch((error) => {
-        console.log(error)
-        console.log("Unable to load page")
-    })
 })
 
 app.get('/b/fic', (req, res) => {
 
-    Post.find({ board: 'fic' , pin: false}).then((result) => {
-        const unpin_posts = result
+    showBoard(req, res, "fic", "/fiction");
 
-        Post.find({ board: 'fic' , pin: true }).then((result) => {
-            res.render('board', {
-                title: "/fiction",
-                board: "fic",
-                pin: result,
-                unpin: unpin_posts
-            })
-        })
-   
-    }).catch((error) => {
-        console.log(error)
-        console.log("Unable to load page")
-    })
 })
 
 app.get('/b/poli', (req, res) => {
 
-    Post.find({ board: 'poli' , pin: false}).then((result) => {
-        const unpin_posts = result
+    showBoard(req, res, "poli", "/poli");
 
-        Post.find({ board: 'poli' , pin: true }).then((result) => {
-            res.render('board', {
-                title: "/poli",
-                board: "poli",
-                pin: result,
-                unpin: unpin_posts
-            })
-        })
-   
-    }).catch((error) => {
-        console.log(error)
-        console.log("Unable to load page")
-    })
 })
 
 app.get('/b/random/:id', (req, res) => {
-    const post_id = req.params.id
-    Post.findById(post_id).then((result) => {
-        console.log("Found a post")
 
-        const post_result = result;
-
-
-        Reply.find({ post_id }).then((result) => {
-            res.render('loadpost', {
-                title: post_result.title, 
-                content: post_result.content, 
-                reply: result,
-                post_id
-            })
-        }).catch((error) => {
-            console.log(error)
-            console.log("Unable to load post " + post_id)
-        })
-
-    }).catch((error) => {
-        console.log(error)
-        console.log("Unable to find post")
-    }) 
+    loadPost(req, res);
 
 })
 
 app.get('/b/tech/:id', (req, res) => {
-    const post_id = req.params.id
-    Post.findById(post_id).then((result) => {
-        console.log("Found a post")
-
-        const post_result = result;
-
-
-        Reply.find({ post_id }).then((result) => {
-            res.render('loadpost', {
-                title: post_result.title, 
-                content: post_result.content, 
-                reply: result,
-                post_id
-            })
-        }).catch((error) => {
-            console.log(error)
-            console.log("Unable to load post " + post_id)
-        })
-
-    }).catch((error) => {
-        console.log(error)
-        console.log("Unable to find post")
-    }) 
+    
+    loadPost(req, res);
 
 })
 
 app.get('/b/fic/:id', (req, res) => {
-    const post_id = req.params.id
-    Post.findById(post_id).then((result) => {
-        console.log("Found a post")
-
-        const post_result = result;
-
-
-        Reply.find({ post_id }).then((result) => {
-            res.render('loadpost', {
-                title: post_result.title, 
-                content: post_result.content, 
-                reply: result,
-                post_id
-            })
-        }).catch((error) => {
-            console.log(error)
-            console.log("Unable to load post " + post_id)
-        })
-
-    }).catch((error) => {
-        console.log(error)
-        console.log("Unable to find post")
-    }) 
+    
+    loadPost(req, res);
 
 })
 
 app.get('/b/poli/:id', (req, res) => {
-    const post_id = req.params.id
-    Post.findById(post_id).then((result) => {
-        console.log("Found a post")
-
-        const post_result = result;
-
-
-        Reply.find({ post_id }).then((result) => {
-            res.render('loadpost', {
-                title: post_result.title, 
-                content: post_result.content, 
-                reply: result,
-                post_id
-            })
-        }).catch((error) => {
-            console.log(error)
-            console.log("Unable to load post " + post_id)
-        })
-
-    }).catch((error) => {
-        console.log(error)
-        console.log("Unable to find post")
-    }) 
+    
+    loadPost(req, res);
 
 })
 

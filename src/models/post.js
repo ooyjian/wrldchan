@@ -18,8 +18,8 @@ const postSchema = new mongoose.Schema({
         default: false
     }, 
     timestamp: {
-        type: Number, 
-        default: new Date().getTime()
+        type: Number,
+        required: true
     }, 
     ip: {
         type: String
