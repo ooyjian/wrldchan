@@ -37,20 +37,19 @@ function compareByTime(a, b) {
     return 0;
 }
 
-function showBoard(req, res, board, title) {
+function showBoard(req, res, board, title, boardImg="") {
     Post.find({ board: board , pin: false}).then((result) => {
         const unpin_posts = result
 
         unpin_posts.sort(compareByTime)
-
-        console.log(unpin_posts);
 
         Post.find({ board: 'random' , pin: true }).then((result) => {
             res.render('board', {
                 title: title,
                 board: board,
                 pin: result,
-                unpin: unpin_posts
+                unpin: unpin_posts, 
+                boardImg
             })
         })
    
@@ -200,8 +199,6 @@ app.post('/b/poli/:id', (req, res) => {
 //////////////////////////// GET Request Below /////////////////////////////////////
 
 app.get('', (req, res) => {
-    console.log(req.ip)
-
     res.render('index', {
         title: "WRLD"
     })
@@ -209,9 +206,9 @@ app.get('', (req, res) => {
 
 ///////////// The boards ////////////////////////////
 
-app.get('/b/random', (req, res) => {
+app.get('/b/inep', (req, res) => {
 
-    showBoard(req, res, "random", "/random");
+    showBoard(req, res, "inep", "Inverted Pen*s", "/img/inepboard.jpg");
     
 })
 
@@ -229,7 +226,7 @@ app.get('/b/fic', (req, res) => {
 
 app.get('/b/poli', (req, res) => {
 
-    showBoard(req, res, "poli", "/poli");
+    showBoard(req, res, "poli", "/poli", "/img/brazil1985jill.jpg");
 
 })
 
@@ -263,16 +260,5 @@ app.get("/submitpost", (req, res) => {
         board
     })
 })
-
-// app.get('/replies', (req, res) => {
-//     Reply.find({time: {$gte: new Date().getTime()-86400000}}).then((result) => {        
-//         res.render('replies', {
-//             title: "Replies", 
-//             reply: result
-//         })
-//     }).catch((error) => {
-//         console.log(error)
-//     })
-// })
 
 app.listen(5000, () => console.log("Connected to wrldchan.org!"))
