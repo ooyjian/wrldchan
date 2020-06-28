@@ -15,7 +15,6 @@ const Post = require('./models/post');
 ///////////////////////// Start of the actual code ////////////////////////////////////////
 
 const app = express()
-app.set('trust proxy', true)
 const publicDirPath = path.join(__dirname, '../public')
 const viewsDirPath = path.join(__dirname, '../templates/views')
 const partialsDirPath = path.join(__dirname, '../templates/partials')
@@ -201,7 +200,7 @@ app.post('/b/poli/:id', (req, res) => {
 //////////////////////////// GET Request Below /////////////////////////////////////
 
 app.get('', (req, res) => {
-    console.log(req.headers['x-forwarded-for'])
+    console.log(req.ip)
 
     res.render('index', {
         title: "WRLD"
