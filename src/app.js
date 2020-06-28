@@ -15,6 +15,7 @@ const Post = require('./models/post');
 ///////////////////////// Start of the actual code ////////////////////////////////////////
 
 const app = express()
+app.set('trust proxy', true)
 const publicDirPath = path.join(__dirname, '../public')
 const viewsDirPath = path.join(__dirname, '../templates/views')
 const partialsDirPath = path.join(__dirname, '../templates/partials')
@@ -112,19 +113,6 @@ app.post('/login', (req, res) => {
     const password = req.body.password
 })
 
-app.post('', (req, res) => {
-    const newReply = new Reply({
-        description: req.body.userInput
-    })
-
-    newReply.save().then(() => {
-        console.log("Reply saved!")
-    }).catch((error) => {
-        console.log(error)
-    })
-    return res.redirect('/replies')
-})
-
 app.post("/deleteallreplies", (req, res) => {
     Reply.deleteMany({}).then(() => {
         console.log("Successfully deleted all replies")
@@ -213,7 +201,7 @@ app.post('/b/poli/:id', (req, res) => {
 //////////////////////////// GET Request Below /////////////////////////////////////
 
 app.get('', (req, res) => {
-    console.log(req.connection.remoteAddress)
+    console.log(req.headers['x-forwarded-for'])
 
     res.render('index', {
         title: "WRLD"
