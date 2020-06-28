@@ -119,6 +119,7 @@ input[name="submitBtn"] {
     text-align: center;
     margin: auto;
     padding: auto;
+    color: #df7e47;
 }
 
 .new-post:hover {
@@ -180,8 +181,18 @@ input[name="submitBtn"] {
     margin-right: 15px;
 }
 
-.boardImg {
-    width: 20%;
+.board-banner {
+    padding: 20px;
+    height: 60px;
+}
+
+.boardTitle{
+    margin-top: 20px;
+    border: 2px solid #ff9fb2;
+    background-color: #4c4c4c;
+    padding: 10px;
+    font-size: 30px;
+    color: #8be6a9;
 }
 
 
@@ -214,4 +225,7 @@ input[name="submitBtn"] {
     color: #eeeeee;
 }
 
+#banner-inep {
+    background: #8be6a9 url(/img/brazil1985jill.jpg) 1%;
+}
 

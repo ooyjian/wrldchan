@@ -12,10 +12,12 @@
         <div id="main-content">
             {{>header}}
             <div style="padding:5px"></div>
+            <div id="banner-inep" class="board-banner">
+                <a id="inepBTitle" class="boardTitle" href="/b/inep">{{title}}</a>
+            </div>
             <div style="text-align: center;">
-                <a class="new-post" href="/submitpost?b={{board}}">{MAKE A NEW POST}</a>
                 <div style="padding:5px"></div>
-                <img id="poliBImg" class="boardImg" src={{boardImg}}>
+                <a class="new-post" href="/submitpost?b={{board}}">{MAKE A NEW POST}</a>
             </div>
 
             <div class="post-area">

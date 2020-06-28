@@ -37,7 +37,7 @@ function compareByTime(a, b) {
     return 0;
 }
 
-function showBoard(req, res, board, title, boardImg="") {
+function showBoard(req, res, board, title) {
     Post.find({ board: board , pin: false}).then((result) => {
         const unpin_posts = result
 
@@ -48,8 +48,7 @@ function showBoard(req, res, board, title, boardImg="") {
                 title: title,
                 board: board,
                 pin: result,
-                unpin: unpin_posts, 
-                boardImg
+                unpin: unpin_posts
             })
         })
    
@@ -208,7 +207,7 @@ app.get('', (req, res) => {
 
 app.get('/b/inep', (req, res) => {
 
-    showBoard(req, res, "inep", "Inverted Pen*s", "/img/inepboard.jpg");
+    showBoard(req, res, "inep", "INVERTED PEN*S");
     
 })
 
@@ -226,11 +225,11 @@ app.get('/b/fic', (req, res) => {
 
 app.get('/b/poli', (req, res) => {
 
-    showBoard(req, res, "poli", "/poli", "/img/brazil1985jill.jpg");
+    showBoard(req, res, "poli", "/poli");
 
 })
 
-app.get('/b/random/:id', (req, res) => {
+app.get('/b/inep/:id', (req, res) => {
 
     loadPost(req, res);
 
