@@ -19,6 +19,9 @@ const replySchema = new Schema({
     post_id: {
         type: ObjectId, 
         default: null
+    }, 
+    ip: {
+        type: String
     }
 })
 

@@ -16,6 +16,13 @@ const postSchema = new mongoose.Schema({
     pin: {
         type: Boolean, 
         default: false
+    }, 
+    timestamp: {
+        type: Number, 
+        default: new Date().getTime()
+    }, 
+    ip: {
+        type: String
     }
 });
 
