@@ -146,7 +146,6 @@ app.post("/deletereply/:id", (req, res) => {
 
 app.post("/replyreply/:id", (req, res) => {
 
-
     Reply.findById(req.params.id).then((result) => {  
         const currentTime = new Date().getTime()
 
@@ -214,6 +213,8 @@ app.post('/b/poli/:id', (req, res) => {
 //////////////////////////// GET Request Below /////////////////////////////////////
 
 app.get('', (req, res) => {
+    console.log(req.connection.remoteAddress)
+
     res.render('index', {
         title: "WRLD"
     })
