@@ -198,6 +198,8 @@ app.post('/b/poli/:id', (req, res) => {
 //////////////////////////// GET Request Below /////////////////////////////////////
 
 app.get('', (req, res) => {
+    console.log(req.ip);
+
     res.render('index', {
         title: "WRLD"
     })
