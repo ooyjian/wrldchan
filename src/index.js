@@ -154,6 +154,8 @@ app.post('/p/:id', (req, res) => {
 
 app.get('', (req, res) => {
     console.log(req.headers)
+    console.log(req.headers['x-forwarded-for'])
+    console.log(req.connection.remoteAddress)
 
     res.render('index', {
         title: "WRLD"
