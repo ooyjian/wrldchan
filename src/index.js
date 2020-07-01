@@ -221,4 +221,4 @@ app.get("/submitpost", (req, res) => {
     })
 })
 
-app.listen(5000, () => console.log("Connected to wrldchan.org!"))
+app.listen(5000, '0.0.0.0', () => console.log("Connected to wrldchan.org!"))
