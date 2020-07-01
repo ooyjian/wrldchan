@@ -153,6 +153,8 @@ app.post('/p/:id', (req, res) => {
 //////////////////////////// GET Request Below /////////////////////////////////////
 
 app.get('', (req, res) => {
+    console.log(req.connection.remoteAddress)
+
     res.render('index', {
         title: "WRLD"
     })
