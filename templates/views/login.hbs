@@ -2,17 +2,42 @@
 <html>
 
     <head>
-
+        <title>Login</title>
+        <link rel="stylesheet" href="/css/styles.css">
     </head>
 
     <body>
-        <div id="main-content">
-            <h1 id="login-text">Login</h1>
-            <form action="/login" method="POST">
-                <input id="username">
-                <input id="password">
-                <button>Login</button>
-            </form>
+        <div class="main-content" id="login-content">
+            {{>header}}
+            <div class="login-block">
+                <h3 id="login-text">Login</h3>
+                <form action="/login" method="POST">
+
+                    <label for="username-input">Username: </label><br>
+                    <input id="username-input" name="loginusername"><br>
+
+                    <label for="password-input">Password: </label><br>
+                    <input id="password-input" name="loginpassword"><br>
+
+                    <input type="submit" id="loginBtn" value="Log in">
+                </form>
+            </div>
+
+            <HR style="FILTER: alpha(opacity=100,finishopacity=0,style=1); margin-top: 50px; margin-bottom: 50px;" width="50%" color="#ff9fb2" SIZE=3 align="center">
+
+            <div class="login-block" id="create-account-block">
+                <h3 id="create-account-text">Create an account</h3>
+                <form action="/createaccount" method="POST">
+
+                    <label for="username-input">Username: </label><br>
+                    <input id="username-input" name="createusername"><br>
+
+                    <label for="password-input">Password: </label><br>
+                    <input id="password-input" name="createpassword"><br>
+
+                    <input type="submit" id="createAccountBtn" class="deleteBtn" value="Create Account">
+                </form>
+            </div>
         </div>
 
         {{>footer}}

@@ -20,11 +20,12 @@ const replySchema = new Schema({
         type: ObjectId, 
         default: null
     }, 
-    ip: {
-        type: String
+    username: {
+        type: String, 
+        default: "Anonymous"
     }
 })
 
 const Reply = new mongoose.model('Reply', replySchema)
 
-module.exports = {Reply: Reply, replySchema: replySchema}
+module.exports = Reply

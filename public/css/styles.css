@@ -64,6 +64,10 @@ input[name="submitBtn"] {
     color: #292929;
 }
 
+.main-content {
+    justify-content: center;
+    flex-grow: 1;
+}
 
 .deleteBtn {
     border: none;
@@ -195,14 +199,17 @@ input[name="submitBtn"] {
     color: #8be6a9;
 }
 
+.login-block {
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%
+}
+
 
 /* Below are the id */
 
 
-#main-content {
-    justify-content: center;
-    flex-grow: 1;
-}
+
 
 #logo{
     display: block;
@@ -227,5 +234,12 @@ input[name="submitBtn"] {
 
 #banner-inep {
     background: #8be6a9 url(/img/brazil1985jill.jpg) 1%;
+}
+
+#login-header {
+    float: right;
+}
+
+#create-account-block {
 }
 
