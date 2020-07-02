@@ -162,7 +162,7 @@ app.post('/submitpost', async (req, res) => {
     })
 
     const username = await getRandomName(req.headers['x-forwarded-for'] + newPost._id.toString())
-    newReply.username = username  
+    newPost.username = username  
     
     await newPost.save()
 
