@@ -21,8 +21,9 @@ const postSchema = new mongoose.Schema({
         type: Number,
         required: true
     }, 
-    ip: {
-        type: String
+    username: {
+        type: String, 
+        default: 'Anonymous'
     }
 });
 

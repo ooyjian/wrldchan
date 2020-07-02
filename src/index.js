@@ -6,14 +6,21 @@ const { rawListeners } = require('process')
 const {ObjectId} = require('mongodb')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const seedrandom = require('seedrandom')
 
 require('./db/mongoose')
 
+const Post = require('./models/post')
+const Reply = require('./models/reply')
 const User = require('./models/user')
 
 const { addReply, convertDate } = require('./helpers/reply')
+const { findNameAdj, adjlen } = require('./name-adj')
+const { findNameNoun, nounlen } = require('./name-noun')
 
 const boards = require('./routers/boards')
+const { post } = require('./routers/boards')
+const { resolveSoa } = require('dns')
 
 ///////////////////////// Start of the actual code ////////////////////////////////////////
 
@@ -34,6 +41,14 @@ app.use('/b', boards)
 
 /////////////////////// Helper functions here ///////////////////////////////////////////
 
+async function getRandomName(name) {
+    const seed = seedrandom(name, { global: true });
+    const ind1 = Math.floor((Math.random() * 10000)) % adjlen;
+    const ind2 = Math.floor((Math.random() * 10000)) % nounlen;
+    
+    return findNameAdj(ind1) + " " + findNameNoun(ind2);
+}
+
 async function opReply(req, res) {
     const post_id = req.params.id
 
@@ -44,6 +59,9 @@ async function opReply(req, res) {
         time: currentTime,
         post_id
     })
+
+    const username = await getRandomName(req.headers['x-forwarded-for'] + post_id.toString())
+    newReply.username = username  
 
     await newReply.save()
 
@@ -121,7 +139,10 @@ app.post("/replyreply/:id", async (req, res) => {
         parent_id: ObjectId(req.params.id),
         post_id: reply.post_id
     })
-        
+
+    const username = await getRandomName(req.headers['x-forwarded-for'] + reply.post_id.toString())
+    newReply.username = username    
+
     await newReply.save()
 
     return res.redirect('back')
@@ -139,6 +160,9 @@ app.post('/submitpost', async (req, res) => {
         board, 
         timestamp: currentTime
     })
+
+    const username = await getRandomName(req.headers['x-forwarded-for'] + newPost._id.toString())
+    newReply.username = username  
     
     await newPost.save()
 
@@ -153,10 +177,6 @@ app.post('/p/:id', (req, res) => {
 //////////////////////////// GET Request Below /////////////////////////////////////
 
 app.get('', (req, res) => {
-    console.log(req.headers)
-    console.log(req.headers['x-forwarded-for'])
-    console.log(req.connection.remoteAddress)
-
     res.render('index', {
         title: "WRLD"
     })
@@ -221,4 +241,4 @@ app.get("/submitpost", (req, res) => {
     })
 })
 
-app.listen(5000, '0.0.0.0', () => console.log("Connected to wrldchan.org!"))
+app.listen(5000, () => console.log("Connected to wrldchan.org!"))

@@ -181,8 +181,9 @@ input[name="submitBtn"] {
 
 .timestamp-reply {
     font-size: 9px;
-    float: right;
-    margin-right: 15px;
+    margin-left: 15px;
+    font-weight: normal;
+    color: #eeeeee;
 }
 
 .board-banner {
@@ -205,6 +206,14 @@ input[name="submitBtn"] {
     width: 50%
 }
 
+.username {
+    font-weight: bold;
+    font-style: italic;
+    color: #64db59;
+    font-size: 10px;
+    margin-left: -2px;
+}
+
 
 /* Below are the id */
 
@@ -220,6 +229,8 @@ input[name="submitBtn"] {
 }
 
 #reply {
+    margin-top: 3px;
+    margin-bottom: 3px;
     white-space: pre-wrap;
 }
 
@@ -240,6 +251,9 @@ input[name="submitBtn"] {
     float: right;
 }
 
-#create-account-block {
+#reply-username {
+    margin-top: 5px;
+    font-size: 9px;
 }
+
 

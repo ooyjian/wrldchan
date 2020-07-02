@@ -40,6 +40,7 @@ async function loadPost(req, res) {
             title: post.title, 
             content: post.content, 
             time: post.timestamp,
+            username: post.username,
             reply,
             post_id
         })
