@@ -18,7 +18,7 @@ async function showBoard(req, res, board, title) {
 
     unpin_posts.sort(compareByTime)
 
-    const pin_posts = await Post.find({ board: 'random' , pin: true })
+    const pin_posts = await Post.find({ board: board , pin: true })
 
     pin_posts.sort(compareByTime)
     
@@ -54,23 +54,23 @@ router.get('/inep', (req, res) => {
     
 })
 
-router.get('/tech', (req, res) => {
+// router.get('/tech', (req, res) => {
 
-    showBoard(req, res, "tech", "/tech");
+//     showBoard(req, res, "tech", "/tech");
 
-})
+// })
 
-router.get('/fic', (req, res) => {
+// router.get('/fic', (req, res) => {
 
-    showBoard(req, res, "fic", "/fiction");
+//     showBoard(req, res, "fic", "/fiction");
 
-})
+// })
 
-router.get('/poli', (req, res) => {
+// router.get('/poli', (req, res) => {
 
-    showBoard(req, res, "poli", "/poli");
+//     showBoard(req, res, "poli", "/poli");
 
-})
+// })
 
 router.get('/inep/:id', (req, res) => {
 
@@ -78,22 +78,22 @@ router.get('/inep/:id', (req, res) => {
 
 })
 
-router.get('/tech/:id', (req, res) => {
+// router.get('/tech/:id', (req, res) => {
     
-    loadPost(req, res);
+//     loadPost(req, res);
 
-})
+// })
 
-router.get('/fic/:id', (req, res) => {
+// router.get('/fic/:id', (req, res) => {
     
-    loadPost(req, res);
+//     loadPost(req, res);
 
-})
+// })
 
-router.get('/poli/:id', (req, res) => {
+// router.get('/poli/:id', (req, res) => {
     
-    loadPost(req, res);
+//     loadPost(req, res);
 
-})
+// })
 
 module.exports = router;

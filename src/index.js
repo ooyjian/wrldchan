@@ -60,8 +60,12 @@ async function opReply(req, res) {
         post_id
     })
 
-    const username = await getRandomName(req.headers['x-forwarded-for'] + post_id.toString())
-    newReply.username = username  
+    try {
+        const username = await getRandomName(req.headers['x-forwarded-for'] + post_id.toString())
+        newReply.username = username  
+    } catch (e) {
+        console.log("Unable to generate username")
+    }
 
     await newReply.save()
 
@@ -69,44 +73,6 @@ async function opReply(req, res) {
 }
 
 /////////////////////// Post Request Below //////////////////////////////////////////////
-
-app.post('/login', async (req, res) => {
-    try {
-        const username = req.body.loginusername
-        const password = req.body.loginpassword
-
-        const exist_account = await User.findOne({ username })
-
-        if (!exist_account) {
-            console.log("Username does not exist")
-            return res.redirect('back')
-        } else if (!bcrypt(exist_account.password, password)) {
-            console.log("Password incorrect")
-            return res.redirect('back')
-        }
-
-        return res.redirect('/')
-    } catch (e) {
-        res.status(400).send()
-    }
-})
-
-app.post("/createaccount", async (req, res) => {
-    try {
-        const username = req.body.createusername
-        const password = req.body.createpassword
-        
-        await new User({
-            username, 
-            password
-        }).save()
-
-        return res.redirect('/')
-    } catch (e) {
-        res.status(400).send()
-    }
-    
-})
 
 app.post("/deleteallreplies", (req, res) => {
     Reply.deleteMany({}).then(() => {
@@ -140,8 +106,12 @@ app.post("/replyreply/:id", async (req, res) => {
         post_id: reply.post_id
     })
 
-    const username = await getRandomName(req.headers['x-forwarded-for'] + reply.post_id.toString())
-    newReply.username = username    
+    try {
+        const username = await getRandomName(req.headers['x-forwarded-for'] + reply.post_id.toString())
+        newReply.username = username    
+    } catch (e) {
+        console.log("Unable to generate username")
+    }
 
     await newReply.save()
 
@@ -161,13 +131,27 @@ app.post('/submitpost', async (req, res) => {
         timestamp: currentTime
     })
 
-    const username = await getRandomName(req.headers['x-forwarded-for'] + newPost._id.toString())
-    newPost.username = username  
-    
+    try {
+        const username = await getRandomName(req.headers['x-forwarded-for'] + newPost._id.toString())
+        newPost.username = username  
+    } catch (e) {
+        console.log("Unable to generate username")
+    }
+
     await newPost.save()
 
     res.redirect('/b/' + board + "/" + newPost._id)
 
+})
+
+app.post('/repost/:id', async (req, res) => {
+    const post_id = req.params.id;
+
+    const currentTime = new Date().getTime();
+
+    const newPost = await Post.findOneAndUpdate({_id: post_id}, {timestamp: currentTime})
+
+    return res.redirect('back');
 })
 
 app.post('/p/:id', (req, res) => {
@@ -184,54 +168,6 @@ app.get('', (req, res) => {
 
 app.get('/login', async (req, res) => {
     res.render('login')
-})
-
-app.get('/b/inep', (req, res) => {
-
-    showBoard(req, res, "inep", "INVERTED PEN*S");
-    
-})
-
-app.get('/b/tech', (req, res) => {
-
-    showBoard(req, res, "tech", "/tech");
-
-})
-
-app.get('/b/fic', (req, res) => {
-
-    showBoard(req, res, "fic", "/fiction");
-
-})
-
-app.get('/b/poli', (req, res) => {
-
-    showBoard(req, res, "poli", "/poli");
-
-})
-
-app.get('/b/inep/:id', (req, res) => {
-
-    loadPost(req, res);
-
-})
-
-app.get('/b/tech/:id', (req, res) => {
-    
-    loadPost(req, res);
-
-})
-
-app.get('/b/fic/:id', (req, res) => {
-    
-    loadPost(req, res);
-
-})
-
-app.get('/b/poli/:id', (req, res) => {
-    
-    loadPost(req, res);
-
 })
 
 app.get("/submitpost", (req, res) => {
