@@ -23,16 +23,20 @@
             <div class="post-area">
                 {{#each pin}}
                     <div class="post-block">
-                        <a style="color: #b92828;">{{this.title}}</a>
-                        <span class="timestamp">{{convertDate this.timestamp}}</span>
+                        <div id="post-title-pin" class="post-title">
+                            {{this.title}}
+                            <span class="timestamp">{{convertDate this.timestamp}}</span>
+                        </div>
                         <a class="view-comment-ref" href="/b/{{board}}/{{this._id}}">[View Comments]</a>
                     </div>
                 {{/each}}
                 
                 {{#each unpin}}
                     <div class="post-block">
-                        <a>{{this.title}}</a>
-                        <span class="timestamp">{{convertDate this.timestamp}}</span>
+                        <div class="post-title">
+                            {{this.title}}
+                            <span class="timestamp">{{convertDate this.timestamp}}</span>
+                        </div>
                         <a class="view-comment-ref" href="/b/{{board}}/{{this._id}}">[View Comments]</a>
                     </div>
                 {{/each}}
