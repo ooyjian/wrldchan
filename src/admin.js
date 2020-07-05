@@ -14,7 +14,7 @@ async function deletePost(post_id) {
         mongoose.connection.close(() => {
             console.log(result);
             console.log(reply_result);
-        })
+        });
     }    
     catch (e) {
             console.log("==============================================");
@@ -28,12 +28,25 @@ async function deleteReply(reply_id) {
         const result = await Reply.findByIdAndUpdate({ _id: reply_id }, { description: "[DELETED BY ADMIN]" });
         mongoose.connection.close(() => {
             console.log(result);
-        })
+        });
     }    
     catch (e) {
             console.log("==============================================");
             console.log(e);
             console.log("Unable to delete reply.");
+    }
+}
+
+async function pinPost(post_id) {
+    try {
+        const result = await Post.findByIdAndUpdate(post_id, { pin: true });
+        mongoose.connection.close(() => {
+            console.log(result);
+        });
+    } catch (e) {
+        console.log("==============================================");
+        console.log(e);
+        console.log("Unable to pin post.");
     }
 }
 
@@ -63,6 +76,20 @@ yargs.command({
     },
     handler: async (argv) => {
         await deleteReply(argv.id);
+    }
+})
+
+yargs.command({
+    command: 'pinpost', 
+    descrite: "Pin a post with the corresponding post id", 
+    builder: {
+        id: {
+            describe: "Post id", 
+            demandOption: true
+        }
+    }, 
+    handler: async(argv) => {
+        await pinPost(argv.id);
     }
 })
 
