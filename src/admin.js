@@ -10,8 +10,10 @@ const mongoose = require('mongoose')
 async function deletePost(post_id) {
     try {
         const result = await Post.deleteOne({ _id: post_id });
+        const reply_result = await Reply.deleteMany({ post_id })
         mongoose.connection.close(() => {
             console.log(result);
+            console.log(reply_result);
         })
     }    
     catch (e) {
