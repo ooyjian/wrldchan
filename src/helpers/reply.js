@@ -35,6 +35,7 @@ function dfs(stack, rest, options, reply_box) {
     const prev_id = parent_reply._id;
     return_html += "<div class=\"" + reply_box + "\">\n"  
                     + "<div id=\"reply-username\" class=\"username\">" + parent_reply.username + "\n"
+                    + "<span id=\"reply-id\">" + parent_reply._id + "</span>" + "\n"
                     + "<span class=\"timestamp-reply\">" + convertDate(parent_reply.time) + "</span>" + "</div>"
                     + "<p id=\"reply\">" + parent_reply.description + "</p>\n" 
                     + options.fn(prev_id.toString()) + "\n";

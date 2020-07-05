@@ -15,8 +15,8 @@ const Reply = require('./models/reply')
 const User = require('./models/user')
 
 const { addReply, convertDate } = require('./helpers/reply')
-const { findNameAdj, adjlen } = require('./name-adj')
-const { findNameNoun, nounlen } = require('./name-noun')
+const { findNameAdj, adjlen } = require('./usernames/name-adj')
+const { findNameNoun, nounlen } = require('./usernames/name-noun')
 
 const boards = require('./routers/boards')
 const { post } = require('./routers/boards')
