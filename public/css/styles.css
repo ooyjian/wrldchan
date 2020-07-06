@@ -89,10 +89,6 @@ input[name="submitBtn"] {
     padding-left: 10px;
 }
 
-.reply-footer {
-    margin-top: 10px;
-}
-
 .board-container {
     display: grid;
     grid-template-columns: repeat(4, min-content);
