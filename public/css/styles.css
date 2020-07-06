@@ -27,13 +27,7 @@ body {
 }
 
 h1 {
-    color: #eeeeee;
     font-size: 48px;
-}
-
-p {
-    color: #eeeeee;
-    font-family: Verdana;
 }
 
 form {
@@ -168,6 +162,21 @@ input[name="submitBtn"] {
     margin-bottom: 15px;
 }
 
+.post-content-title {
+    display: inline-block;
+    font-size: 16px;
+    width: 80%;
+    margin-top: 5px;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.post-content {
+    font-size: 14px;
+    white-space: pre-wrap;
+    margin-bottom: 0px;
+}
+
 .announcement {
     border: 2px solid #ff9fb2;
     background-color: #4c4c4c;
@@ -225,6 +234,13 @@ input[name="submitBtn"] {
     width: 70%;
 }
 
+.reply {
+    font-size: 14px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    white-space: pre-wrap;
+}
+
 
 /* Below are the id */
 
@@ -239,11 +255,7 @@ input[name="submitBtn"] {
     margin-top: 50px;
 }
 
-#reply {
-    margin-top: 3px;
-    margin-bottom: 3px;
-    white-space: pre-wrap;
-}
+
 
 #posttitle {
     border: none;
