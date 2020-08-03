@@ -261,6 +261,7 @@ input[name="submitBtn"] {
     padding: 5px;
     background-color: #292929;
     color: #eeeeee;
+    width: 600px;
 }
 
 #banner-inep {
