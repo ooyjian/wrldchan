@@ -21,7 +21,7 @@ const { findNameNoun, nounlen } = require('./usernames/name-noun')
 const boards = require('./routers/boards')
 const { post } = require('./routers/boards')
 const { resolveSoa } = require('dns')
-const { fstat } = require('fs')
+const fs = require('fs');
 
 ///////////////////////// Start of the actual code ////////////////////////////////////////
 
@@ -71,25 +71,6 @@ async function opReply(req, res) {
     await newReply.save()
 
     return res.redirect('back')
-}
-
-async function logUser(req) {
-    const userip = req.headers['x-forwarded-for'];
-    const d = new Date();
-
-    try {
-        const userlogfd = await fs.open('./userlog');
-    } catch (e) {
-        console.log("Cannot open file");
-    }
-
-    try {
-        await fs.write(userlogfd, d + " " + userip + "\n");
-        fs.close(userlogfd)
-    } catch (e) {
-        console.log("Cannot write to file");
-    }
-    
 }
 
 /////////////////////// Post Request Below //////////////////////////////////////////////
@@ -181,8 +162,6 @@ app.post('/p/:id', (req, res) => {
 //////////////////////////// GET Request Below /////////////////////////////////////
 
 app.get('', (req, res) => {
-    logUser(req);
-
     res.render('index', {
         title: "WRLD"
     })
