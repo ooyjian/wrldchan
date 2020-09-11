@@ -50,7 +50,7 @@ async function loadPost(req, res) {
 
 router.get('/inep', (req, res) => {
 
-    showBoard(req, res, "inep", "INVERTED PEN*S");
+    showBoard(req, res, "inep", "WRLD");
     
 })
 
