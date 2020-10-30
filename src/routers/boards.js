@@ -2,10 +2,10 @@ const express = require('express');
 const Post = require('../models/post');
 const Reply = require('../models/reply');
 
-
+// This is the router for all the boards. 
 const router = express.Router();
 
-
+// Helper Func. Compare which time is earlier. 
 function compareByTime(a, b) {
     if (a.timestamp > b.timestamp) return -1;
     if (a.timestamp < b.timestamp) return 1;
@@ -13,6 +13,7 @@ function compareByTime(a, b) {
     return 0;
 }
 
+// Show the posts by their order. (And everything else in the board)
 async function showBoard(req, res, board, title) {
     const unpin_posts = await Post.find({ board: board , pin: false})
 
@@ -30,6 +31,7 @@ async function showBoard(req, res, board, title) {
     })
 }
 
+// Load a single post
 async function loadPost(req, res) {
     const post_id = req.params.id
     const post = await Post.findById(post_id)
@@ -46,12 +48,20 @@ async function loadPost(req, res) {
         })
 }
 
+async function loadStreamPost(req, res) {
+    
+}
+
 
 
 router.get('/inep', (req, res) => {
 
     showBoard(req, res, "inep", "WRLD");
     
+})
+
+router.get('/stream', (req, res) => {
+    showBoard(req, res, "stream", "Ronnie2kHateBoard");
 })
 
 // router.get('/tech', (req, res) => {
@@ -76,7 +86,13 @@ router.get('/inep/:id', (req, res) => {
 
     loadPost(req, res);
 
-})
+});
+
+router.get('/inep/:id', (req, res) => {
+
+    // loadStreamPost(req, res);
+
+});
 
 // router.get('/tech/:id', (req, res) => {
     
