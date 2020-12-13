@@ -1,4 +1,5 @@
 const express = require('express')
+const markdown = require('markdown').markdown
 const path = require('path')
 const hbs = require('hbs')
 const bodyParser = require('body-parser')
@@ -100,8 +101,10 @@ app.post("/replyreply/:id", async (req, res) => {
     
     const currentTime = new Date().getTime()
 
+    const replyBody = markdown.toHTML(req.body.replyArea)
+
     const newReply = new Reply({
-        description: req.body.replyArea, 
+        description: replyBody, 
         time: currentTime,
         parent_id: ObjectId(req.params.id),
         post_id: reply.post_id
@@ -122,7 +125,7 @@ app.post("/replyreply/:id", async (req, res) => {
 app.post('/submitpost', async (req, res) => {
     const board = req.query.b
     const title = req.body.posttitle
-    const content = req.body.postcontent
+    const content = markdown.toHTML(req.body.postcontent)
     const currentTime = new Date().getTime();
     
     const newPost = new Post({

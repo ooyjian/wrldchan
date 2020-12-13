@@ -52,7 +52,7 @@ async function loadStreamPost(req, res) {
     
 }
 
-
+// Get the first page of the board
 
 router.get('/inep', (req, res) => {
 
@@ -60,56 +60,12 @@ router.get('/inep', (req, res) => {
     
 })
 
-router.get('/stream', (req, res) => {
-    showBoard(req, res, "stream", "Ronnie2kHateBoard");
-})
-
-// router.get('/tech', (req, res) => {
-
-//     showBoard(req, res, "tech", "/tech");
-
-// })
-
-// router.get('/fic', (req, res) => {
-
-//     showBoard(req, res, "fic", "/fiction");
-
-// })
-
-// router.get('/poli', (req, res) => {
-
-//     showBoard(req, res, "poli", "/poli");
-
-// })
+// Get the post page
 
 router.get('/inep/:id', (req, res) => {
 
     loadPost(req, res);
 
 });
-
-router.get('/inep/:id', (req, res) => {
-
-    // loadStreamPost(req, res);
-
-});
-
-// router.get('/tech/:id', (req, res) => {
-    
-//     loadPost(req, res);
-
-// })
-
-// router.get('/fic/:id', (req, res) => {
-    
-//     loadPost(req, res);
-
-// })
-
-// router.get('/poli/:id', (req, res) => {
-    
-//     loadPost(req, res);
-
-// })
 
 module.exports = router;
