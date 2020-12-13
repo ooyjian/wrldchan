@@ -6,7 +6,7 @@ header {
     font-size: 10px;
 }
 
-a {
+.typical-a {
     padding: 0 8px;
     color: #F0EFEC;
     text-decoration: none;
@@ -170,7 +170,9 @@ input[name="submitBtn"] {
 
 .post-content {
     font-size: 14px;
-    white-space: pre-wrap;
+    /* white-space: pre-wrap; */
+    word-wrap: break-word;
+    padding-top: 3px;
     margin-bottom: 0px;
 }
 
@@ -237,6 +239,8 @@ input[name="submitBtn"] {
     margin-bottom: 3px;
     white-space: pre-wrap;
 }
+
+
 
 
 /* Below are the id */

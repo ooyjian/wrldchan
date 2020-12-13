@@ -13,11 +13,11 @@
             {{>header}}
             <div style="padding:5px"></div>
             <div id="banner-inep" class="board-banner">
-                <a id="inepBTitle" class="boardTitle" href="/b/inep">{{title}}</a>
+                <a id="inepBTitle" class="boardTitle typical-a" href="/b/inep">{{title}}</a>
             </div>
             <div style="text-align: center;">
                 <div style="padding:5px"></div>
-                <a class="new-post" href="/submitpost?b={{board}}">{MAKE A NEW POST}</a>
+                <a class="new-post typical-a" href="/submitpost?b={{board}}">{MAKE A NEW POST}</a>
             </div>
 
             <div class="post-area">
@@ -27,7 +27,7 @@
                             {{this.title}}
                             <span class="timestamp">{{convertDate this.timestamp}}</span>
                         </div>
-                        <a class="view-comment-ref" href="/b/{{board}}/{{this._id}}">[View Comments]</a>
+                        <a class="typical-a view-comment-ref" href="/b/{{board}}/{{this._id}}">[View Comments]</a>
                     </div>
                 {{/each}}
                 
@@ -37,7 +37,7 @@
                             {{this.title}}
                             <span class="timestamp">{{convertDate this.timestamp}}</span>
                         </div>
-                        <a class="view-comment-ref" href="/b/{{board}}/{{this._id}}">[View Comments]</a>
+                        <a class="typical-a view-comment-ref" href="/b/{{board}}/{{this._id}}">[View Comments]</a>
                     </div>
                 {{/each}}
             </div>
