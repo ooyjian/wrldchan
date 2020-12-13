@@ -172,7 +172,7 @@ input[name="submitBtn"] {
     font-size: 14px;
     /* white-space: pre-wrap; */
     word-wrap: break-word;
-    padding-top: 3px;
+    /* padding-top: 3px; */
     margin-bottom: 0px;
 }
 
