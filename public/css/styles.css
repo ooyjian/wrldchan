@@ -166,6 +166,8 @@ input[name="submitBtn"] {
     margin-top: 5px;
     font-weight: 500;
     margin-bottom: 10px;
+    font-weight: bold;
+    font-style: italic;
 }
 
 .post-content {
