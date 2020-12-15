@@ -56,8 +56,10 @@ async function opReply(req, res) {
 
     const currentTime = new Date().getTime();
 
+    const replyBody = markdown.toHTML(req.body.userInput)
+
     const newReply = new Reply({
-        description: req.body.userInput,
+        description: replyBody,
         time: currentTime,
         post_id
     })
