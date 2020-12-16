@@ -19,11 +19,12 @@ function setSel(buttonType) {
             newText = val.substring(0, start) + "*" + sel + "*" + val.substring(finish, val.length);
             break;
         case "header-2":
-            newText = val.substring(0, start) + "##" + sel + "##" + val.substring(finish, val.length);
+            newText = val.substring(0, start) + "##" + sel + val.substring(finish, val.length);
             break;
         case "header-3":
-            newText = val.substring(0, start) + "###" + sel + "###" + val.substring(finish, val.length);
+            newText = val.substring(0, start) + "###" + sel + val.substring(finish, val.length);
             break;
     }
     txtarea.value = newText;
+    return ;
 }
