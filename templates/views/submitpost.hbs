@@ -19,16 +19,15 @@
                 <label for="posttitle">Title: </label> <br>
                 <input type="text" id="posttitle" name="posttitle" size="82"><br>
                 
+                <label for="postcontent">Content: </label><br>
                 {{!-- Style Buttons --}}
                 <div id="outer">
-                    <div class="inner-buttons"><button onclick="setSel('bold')">bold</button></div>
-                    <div class="inner-buttons"><button onclick="setSel('italics')">italics</button></div>
-                    <div class="inner-buttons"><button onclick="setSel('header-2')">big head</button></div>
-                    <div class="inner-buttons"><button onclick="setSel('header-3')">small head</button></div>
-                    <div class="inner-buttons"><button onclick="setSel('link')">Link to Another Website</button></div>
+                    <div class="inner-buttons"><button onclick="setSel('bold')" type="button">bold</button></div>
+                    <div class="inner-buttons"><button onclick="setSel('italics')" type="button">italics</button></div>
+                    <div class="inner-buttons"><button onclick="setSel('header-2')" type="button">big head</button></div>
+                    <div class="inner-buttons"><button onclick="setSel('header-3')" type="button">small head</button></div>
+                    <div class="inner-buttons"><button onclick="setSel('link')" type="button">Link to Another Website</button></div>
                 </div>
-
-                <label for="postcontent">Content: </label><br>
                 <textarea type="text" id="postcontent" name="postcontent"></textarea><br>
 
                 <input type="submit" class="deleteBtn" name="submitPostBtn" value="Submit">
