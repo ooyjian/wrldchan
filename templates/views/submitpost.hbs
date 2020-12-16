@@ -7,7 +7,7 @@
         <link rel="stylesheet" href="/css/styles.css">
         <title>Submit Post</title>
         <script src="/js/reply.js"></script>
-
+        <script src="/js/style-text.js"></script>
     </head>
 
     <body>
@@ -19,6 +19,14 @@
                 <label for="posttitle">Title: </label> <br>
                 <input type="text" id="posttitle" name="posttitle" size="82"><br>
                 
+                {{!-- Style Buttons --}}
+                <div id="outer">
+                    <div class="inner-buttons"><button onclick="setSel('bold')">bold</button></div>
+                    <div class="inner-buttons"><button onclick="setSel('italics')">italics</button></div>
+                    <div class="inner-buttons"><button onclick="setSel('header-2')">big head</button></div>
+                    <div class="inner-buttons"><button onclick="setSel('header-3')">small head</button></div>
+                </div>
+
                 <label for="postcontent">Content: </label><br>
                 <textarea type="text" id="postcontent" name="postcontent"></textarea><br>
 

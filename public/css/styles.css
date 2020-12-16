@@ -295,3 +295,13 @@ input[name="submitBtn"] {
     color: #b92828;
 }
 
+/* For styling text */
+#outer
+{
+    width:100%;
+    text-align: left;
+}
+.inner
+{
+    display: inline-block;
+}
