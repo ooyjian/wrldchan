@@ -242,7 +242,9 @@ input[name="submitBtn"] {
     white-space: pre-wrap;
 }
 
-
+.reply a:link{ color: #00d4ff }
+.reply a:hover{ color: #002bff }
+.reply a:visited{ color: #cc00ff }
 
 
 /* Below are the id */
