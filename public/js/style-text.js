@@ -10,7 +10,8 @@ function setSel(buttonType) {
     // obtain the selected text
     const sel = val.substring(start, finish);
     var newText = sel;
-    // do something with the selected content
+    
+    // change textarea depending on the button and selected text
     switch(buttonType) {
         case "bold":
             newText = val.substring(0, start) + "**" + sel + "**" + val.substring(finish, val.length);
@@ -24,6 +25,16 @@ function setSel(buttonType) {
         case "header-3":
             newText = val.substring(0, start) + "###" + sel + val.substring(finish, val.length);
             break;
+        case "link":
+            if (sel.length === 0) {
+                newText = val.substring(0, start) + "[Put Link Name Here](Paste URL Here)" + val.substring(finish, val.length);
+            } else {
+                if (sel.substring(0, 4) === "http" || sel.substring(0, 5) === "https") {
+                    newText = val.substring(0, start) + "[Put Link Name Here]" + "(" + sel + ")" + val.substring(finish, val.length);
+                }
+                newText = val.substring(0, start) + "["+ sel + "](Paste URL Here)" + val.substring(finish, val.length);
+            }
+            break;         
     }
     txtarea.value = newText;
     return ;
