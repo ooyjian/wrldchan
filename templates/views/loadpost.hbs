@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="/css/styles.css">
         <title>{{title}}</title>
         <script src="/js/reply.js"></script>
+        <script src="/js/style-text.js"></script>
     </head>
 
     <body>
@@ -31,7 +32,14 @@
                     <input type="submit" value="Repost">
                 </form>
                 <form action="/p/{{post_id}}" id="op-reply" method="POST" style="display: none;">
-                    <textarea class="reply-area" name="userInput" style="background-color: #363636;"></textarea>
+                    <div class="outer">
+                        <div class="inner-buttons"><button onclick="setSel('replyArea-OP', 'bold')" type="button">bold</button></div>
+                        <div class="inner-buttons"><button onclick="setSel('replyArea-OP', 'italics')" type="button">italics</button></div>
+                        <div class="inner-buttons"><button onclick="setSel('replyArea-OP', 'header-2')" type="button">big head</button></div>
+                        <div class="inner-buttons"><button onclick="setSel('replyArea-OP', 'header-3')" type="button">small head</button></div>
+                        <div class="inner-buttons"><button onclick="setSel('replyArea-OP', 'link')" type="button">Link to Another Website</button></div>
+                    </div>
+                    <textarea class="reply-area" id="replyArea-OP" name="userInput" style="background-color: #363636;"></textarea>
                     <input type="submit" value="Submit">
                 </form>
             </div>

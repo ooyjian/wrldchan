@@ -1,3 +1,4 @@
+<script src="/js/style-text.js"></script>
 <div class="reply-footer">
     {{!-- <form action="/deletereply/{{this}}" method="POST">
         <input type="submit" class="deleteBtn" value="Delete">
@@ -7,7 +8,14 @@
         <input type="button" class="deleteBtn" value="Reply" id={{this}} onclick="reply(id)">
 
         <div id="replyArea-{{this}}" name="replyArea" style="display: none;">
-            <textarea class="reply-area" name="replyArea" style="height: 200px; background-color: #4c4c4c;"></textarea>
+            <div class="outer">
+                <div class="inner-buttons"><button onclick="setSel('replyArea', 'bold')" type="button">bold</button></div>
+                <div class="inner-buttons"><button onclick="setSel('replyArea', 'italics')" type="button">italics</button></div>
+                <div class="inner-buttons"><button onclick="setSel('replyArea', 'header-2')" type="button">big head</button></div>
+                <div class="inner-buttons"><button onclick="setSel('replyArea', 'header-3')" type="button">small head</button></div>
+                <div class="inner-buttons"><button onclick="setSel('replyArea', 'link')" type="button">Link to Another Website</button></div>
+            </div>
+            <textarea class="reply-area" id="replyArea" name="replyArea" style="height: 200px; background-color: #4c4c4c;"></textarea>
             <input type="submit" value="Submit">
         </div>
     </form>
