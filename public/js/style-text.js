@@ -8,21 +8,22 @@ function setSel(buttonType) {
     // obtain text value in textarea
     var val = txtarea.value;
     // obtain the selected text
-    var sel = val.substring(start, finish);
+    const sel = val.substring(start, finish);
+    var newText = sel;
     // do something with the selected content
     switch(buttonType) {
         case "bold":
-            var newText = val.substring(0, start) + "**" + sel + "**" + val.substring(finish, val.length);
+            newText = val.substring(0, start) + "**" + sel + "**" + val.substring(finish, val.length);
             break;
         case "italics":
-            var newText = val.substring(0, start) + "*" + sel + "*" + val.substring(finish, val.length);
+            newText = val.substring(0, start) + "*" + sel + "*" + val.substring(finish, val.length);
             break;
         case "header-2":
-            var newText = val.substring(0, start) + "##" + sel + "##" + val.substring(finish, val.length);
+            newText = val.substring(0, start) + "##" + sel + "##" + val.substring(finish, val.length);
             break;
         case "header-3":
-            var newText = val.substring(0, start) + "###" + sel + "###" + val.substring(finish, val.length);
+            newText = val.substring(0, start) + "###" + sel + "###" + val.substring(finish, val.length);
             break;
     }
-    return sel;
+    txtarea.value = newText;
 }
