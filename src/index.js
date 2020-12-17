@@ -19,10 +19,8 @@ const { addReply, convertDate } = require('./helpers/reply')
 const { findNameAdj, adjlen } = require('./usernames/name-adj')
 const { findNameNoun, nounlen } = require('./usernames/name-noun')
 
-const boards = require('./routers/boards')
-const { post } = require('./routers/boards')
-const { resolveSoa } = require('dns')
-const fs = require('fs');
+const boardsRouter = require('./routers/boards')
+const adminRouter = require('./routers/admin')
 
 ///////////////////////// Start of the actual code ////////////////////////////////////////
 
@@ -39,7 +37,10 @@ hbs.registerPartials(partialsDirPath)
 hbs.registerHelper('addReply', addReply)
 hbs.registerHelper('convertDate', convertDate)
 
-app.use('/b', boards)
+/////////////////////// Routers here ///////////////////////////////////////////
+
+app.use('/b', boardsRouter)
+app.use('/m', adminRouter)
 
 /////////////////////// Helper functions here ///////////////////////////////////////////
 
@@ -174,7 +175,7 @@ app.get('', (req, res) => {
 
 app.get('/login', async (req, res) => {
     res.render('login')
-})
+}) 
 
 app.get("/submitpost", (req, res) => {
     const board = req.query.b

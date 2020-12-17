@@ -11,10 +11,12 @@ async function deletePost(post_id) {
     try {
         const result = await Post.deleteOne({ _id: post_id });
         const reply_result = await Reply.deleteMany({ post_id })
-        mongoose.connection.close(() => {
-            console.log(result);
-            console.log(reply_result);
-        });
+        console.log(result);
+        console.log(reply_result);
+        // mongoose.connection.close(() => {
+        //     console.log(result);
+        //     console.log(reply_result);
+        // });
     }    
     catch (e) {
             console.log("==============================================");
@@ -26,9 +28,10 @@ async function deletePost(post_id) {
 async function deleteReply(reply_id) {
     try {
         const result = await Reply.findByIdAndUpdate({ _id: reply_id }, { description: "[DELETED BY ADMIN]" });
-        mongoose.connection.close(() => {
-            console.log(result);
-        });
+        console.log(result);
+        // mongoose.connection.close(() => {
+        //     console.log(result);
+        // });
     }    
     catch (e) {
             console.log("==============================================");
@@ -40,9 +43,24 @@ async function deleteReply(reply_id) {
 async function pinPost(post_id) {
     try {
         const result = await Post.findByIdAndUpdate(post_id, { pin: true });
-        mongoose.connection.close(() => {
-            console.log(result);
-        });
+        console.log(result);
+        // mongoose.connection.close(() => {
+        //     console.log(result);
+        // });
+    } catch (e) {
+        console.log("==============================================");
+        console.log(e);
+        console.log("Unable to pin post.");
+    }
+}
+
+async function unpinPost(post_id) {
+    try {
+        const result = await Post.findByIdAndUpdate(post_id, { pin: false });
+        console.log(result);
+        // mongoose.connection.close(() => {
+        //     console.log(result);
+        // });
     } catch (e) {
         console.log("==============================================");
         console.log(e);
@@ -94,3 +112,8 @@ yargs.command({
 })
 
 console.log(yargs.argv)
+
+module.exports = {dpost: deletePost, 
+                  dreply: deleteReply, 
+                  pinpost: pinPost, 
+                  unpinpost: unpinPost}
