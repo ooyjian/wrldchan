@@ -178,6 +178,10 @@ input[name="submitBtn"] {
     margin-bottom: 0px;
 }
 
+.post-content a:link{ color: #00d4ff }
+.post-content a:hover{ color: #002bff }
+.post-content a:visited{ color: #cc00ff }
+
 .announcement {
     border: 2px solid #ff9fb2;
     background-color: #4c4c4c;
