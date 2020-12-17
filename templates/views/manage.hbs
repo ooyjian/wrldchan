@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>Manage</title>
+        <link rel="stylesheet" href="/css/styles.css">
+    </head>
+
+    <body>
+        {{>header}}
+        <div class="main-content">
+            {{#each pin}}
+                <div class="post-block">
+                    <div id="post-title-pin" class="post-title">
+                        {{this.title}}
+                        {{!-- <span class="timestamp">{{convertDate this.timestamp}}</span> --}}
+                    </div>
+                    <div class="outer" style="display: flex; justify-content: right;">
+                        <form action="/m/dpost/{{this._id}}" id="op-reply" method="POST">
+                            <div class="inner-buttons"><button style="margin-right: 2px;">delete post</button></div>
+                        </form>
+                        <form action="/m/unpinpost/{{this._id}}" id="op-reply" method="POST">
+                            <div class="inner-buttons"><button>unpin post</button></div>
+                        </form>
+                    </div>
+                </div>
+            {{/each}}
+
+            {{#each unpin}}
+                <div class="post-block">
+                    <div id="post-title" class="post-title">
+                        {{this.title}}
+                        {{!-- <span class="timestamp">{{convertDate this.timestamp}}</span> --}}
+                    </div>
+                    <div class="outer" style="display: flex; justify-content: right;">
+                        <form action="/m/dpost/{{this._id}}" id="op-reply" method="POST">
+                            <div class="inner-buttons"><button style="margin-right: 2px;">delete post</button></div>
+                        </form>
+                        <form action="/m/pinpost/{{this._id}}" id="op-reply" method="POST">
+                            <div class="inner-buttons"><button>pin post</button></div>
+                        </form>
+                    </div>
+                </div>
+            {{/each}}
+        </div>
+
+        {{>footer}}
+    </body>
+
+</html>
