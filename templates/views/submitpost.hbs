@@ -8,6 +8,9 @@
         <title>Submit Post</title>
         <script src="/js/reply.js"></script>
         <script src="/js/style-text.js"></script>
+        {{!-- recaptcha scripts --}}
+        <script src="https://www.google.com/recaptcha/api.js?render=6Lev5xEaAAAAAOjghbwR3wlai4VP7BkfjJccshV3"></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     </head>
 
     <body>
@@ -15,10 +18,11 @@
         <div class="main-content" style="margin-left: auto; margin-right: auto; width: 70%; margin-top: 50px;">
             
 
-            <form action="/submitpost?b={{board}}" method="POST" style="font-size: 16px;">
+            <form id="submitpost-form" style="font-size: 16px;">
                 <label for="posttitle">Title: </label> <br>
                 <input type="text" id="posttitle" name="posttitle" size="82"><br>
-                
+                <input type="hidden" id="recaptcha" name="recaptcha">
+
                 <label for="postcontent">Content: </label><br>
                 {{!-- Style Buttons --}}
                 <div id="outer">
@@ -29,9 +33,43 @@
                     <div class="inner-buttons"><button onclick="setSel('postcontent', 'link')" type="button">Link to Another Website</button></div>
                 </div>
                 <textarea type="text" id="postcontent" name="postcontent"></textarea><br>
-
-                <input type="submit" class="deleteBtn" name="submitPostBtn" value="Submit">
+                
+                <button class="deleteBtn" id="submitPostBtn">Submit</button>
             </form>
+
+
+            <script>
+                function recaptchaFunc(e) {
+                    e.preventDefault()
+                    const board = "{{board}}"
+                    console.log(board)
+                    var data = {
+                        posttitle: document.getElementById("posttitle").value, 
+                        recaptcha: document.getElementById("recaptcha").value,
+                        postcontent: document.getElementById("postcontent").value
+                    };
+                    console.log(data)
+                    console.log("/submitpost?b=" + board)
+
+                    axios({
+                        method: "post", 
+                        url: "/submitpost?b=inep",
+                        body: data
+                    })
+                    .then(res => console.log(res))
+                    .catch(err => console.log(err))
+                }
+
+                
+                grecaptcha.ready(function() {
+                    grecaptcha.execute('6Lev5xEaAAAAAOjghbwR3wlai4VP7BkfjJccshV3', {action: "submit"})
+                        .then(function(token) {
+                            document.getElementById('recaptcha').value = token;
+                            document.getElementById("submitpost-form").addEventListener('submit', recaptchaFunc);
+                        });
+                });
+            </script>
+
         </div>
         {{>footer}}
     </body>
