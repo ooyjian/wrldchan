@@ -40,26 +40,26 @@
 
             <script>
                 function recaptchaFunc(e) {
-                    e.preventDefault()
-                    const board = "{{board}}"
+                    e.preventDefault();
+                    const board = "{{board}}";
 
                     const data = new URLSearchParams();
                     data.append('posttitle', document.getElementById("posttitle").value);
                     data.append('recaptcha', document.getElementById("recaptcha").value);
                     data.append('postcontent', document.getElementById('postcontent').value);
 
-                    axios({
+                    return axios({
                         method: "post", 
                         url: "/submitpost?b=" + board,
                         data: data
                     })
-                    .then(res => {}})
-                    .catch(err => console.log(err))
+                    .then(res => {window.location.assign('/b/' + board)})
+                    .catch(err => console.log(err));
                 }
 
-                
+                const sitekey = "{{sitekey}}";
                 grecaptcha.ready(function() {
-                    grecaptcha.execute('6Lev5xEaAAAAAOjghbwR3wlai4VP7BkfjJccshV3', {action: "submit"})
+                    grecaptcha.execute(sitekey, {action: "submit"})
                         .then(function(token) {
                             document.getElementById('recaptcha').value = token;
                             document.getElementById("submitpost-form").addEventListener('submit', recaptchaFunc);

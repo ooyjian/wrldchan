@@ -9,6 +9,7 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const seedrandom = require('seedrandom')
 const axios = require('axios')
+require('dotenv').config()
 
 require('./db/mongoose')
 
@@ -128,7 +129,7 @@ app.post("/replyreply/:id", async (req, res) => {
 
 app.post('/submitpost', async (req, res) => {
     try {
-        const secretkey = "6Lev5xEaAAAAAPRz3b8JV6O37P8A-WSdOE3hcGL4";
+        const secretkey = process.env.SECRET_KEY;
         const token = req.body.recaptcha;
         const url = "https://www.google.com/recaptcha/api/siteverify?secret=" + secretkey + "&response=" + token;
         const response = await axios.post(url);
@@ -195,7 +196,8 @@ app.get('/login', async (req, res) => {
 app.get("/submitpost", (req, res) => {
     const board = req.query.b
     res.render('submitpost', {
-        board
+        board, 
+        sitekey: process.env.SITE_KEY
     })
 })
 
