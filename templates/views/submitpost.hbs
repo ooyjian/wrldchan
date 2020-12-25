@@ -59,7 +59,7 @@
 
                 const sitekey = "{{sitekey}}";
                 grecaptcha.ready(function() {
-                    grecaptcha.execute(sitekey, {action: "submit"})
+                    grecaptcha.execute(sitekey)
                         .then(function(token) {
                             document.getElementById('recaptcha').value = token;
                             document.getElementById("submitpost-form").addEventListener('submit', recaptchaFunc);
