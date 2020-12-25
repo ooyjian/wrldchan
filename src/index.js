@@ -34,7 +34,6 @@ app.set('view engine', 'hbs')
 app.set('views', viewsDirPath)
 app.use(express.static(publicDirPath))
 app.use(bodyParser.urlencoded({ extended: true }))
-app.use(bodyParser.json())
 hbs.registerPartials(partialsDirPath)
 hbs.registerHelper('addReply', addReply)
 hbs.registerHelper('convertDate', convertDate)
@@ -129,19 +128,19 @@ app.post("/replyreply/:id", async (req, res) => {
 
 app.post('/submitpost', async (req, res) => {
     try {
-        const secretkey = "6Lev5xEaAAAAAPRz3b8JV6O37P8A-WSdOE3hcGL4"
-        const token = req.body.recaptcha
-        console.log(res.body)
-        console.log(token)
-        const url = "https://www.google.com/recaptcha/api/siteverify?secret=" + secretkey + "&response=" + token
-        const response = await axios.post(url)
-        console.log(response)
+        const secretkey = "6Lev5xEaAAAAAPRz3b8JV6O37P8A-WSdOE3hcGL4";
+        const token = req.body.recaptcha;
+        const url = "https://www.google.com/recaptcha/api/siteverify?secret=" + secretkey + "&response=" + token;
+        const response = await axios.post(url);
+        if (response.data.success == false || response.data.score <= 0.4) {
+            res.send({"Error": "Unable to connect"});
+            return;
+        }
     } catch (e) {
-        res.send({"Error": "Unable to connect"})
-        console.log(e)
-        return
+        res.send({"Error": "Unable to connect"});
+        console.log(e);
+        return;
     }
-    return
     const board = req.query.b
     const title = req.body.posttitle
     const content = markdown.toHTML(req.body.postcontent)

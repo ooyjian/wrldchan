@@ -42,21 +42,18 @@
                 function recaptchaFunc(e) {
                     e.preventDefault()
                     const board = "{{board}}"
-                    console.log(board)
-                    var data = {
-                        posttitle: document.getElementById("posttitle").value, 
-                        recaptcha: document.getElementById("recaptcha").value,
-                        postcontent: document.getElementById("postcontent").value
-                    };
-                    console.log(data)
-                    console.log("/submitpost?b=" + board)
+
+                    const data = new URLSearchParams();
+                    data.append('posttitle', document.getElementById("posttitle").value);
+                    data.append('recaptcha', document.getElementById("recaptcha").value);
+                    data.append('postcontent', document.getElementById('postcontent').value);
 
                     axios({
                         method: "post", 
-                        url: "/submitpost?b=inep",
-                        body: data
+                        url: "/submitpost?b=" + board,
+                        data: data
                     })
-                    .then(res => console.log(res))
+                    .then(res => {}})
                     .catch(err => console.log(err))
                 }
 
