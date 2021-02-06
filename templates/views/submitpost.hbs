@@ -9,8 +9,8 @@
         <script src="/js/reply.js"></script>
         <script src="/js/style-text.js"></script>
         {{!-- recaptcha scripts --}}
-        <script src="https://www.google.com/recaptcha/api.js?render={{sitekey}}"></script>
-        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        {{!-- <script src="https://www.google.com/recaptcha/api.js?render={{sitekey}}"></script> --}}
+        {{!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> --}}
     </head>
 
     <body>
@@ -18,7 +18,7 @@
         <div class="main-content" style="margin-left: auto; margin-right: auto; width: 70%; margin-top: 50px;">
             
 
-            <form id="submitpost-form" style="font-size: 16px;">
+            <form id="submitpost-form" style="font-size: 16px;" action="/submitpost?b={{board}}">
                 <label for="posttitle">Title: </label> <br>
                 <input type="text" id="posttitle" name="posttitle" size="82"><br>
                 <input type="hidden" id="recaptcha" name="recaptcha">
@@ -38,7 +38,7 @@
             </form>
 
 
-            <script>
+            {{!-- <script>
                 function recaptchaFunc(e) {
                     e.preventDefault();
                     const board = "{{board}}";
@@ -65,7 +65,7 @@
                             document.getElementById("submitpost-form").addEventListener('submit', recaptchaFunc);
                         });
                 });
-            </script>
+            </script> --}}
 
         </div>
         {{>footer}}

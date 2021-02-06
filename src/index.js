@@ -128,20 +128,20 @@ app.post("/replyreply/:id", async (req, res) => {
 })
 
 app.post('/submitpost', async (req, res) => {
-    try {
-        const secretkey = process.env.SECRET_KEY;
-        const token = req.body.recaptcha;
-        const url = "https://www.google.com/recaptcha/api/siteverify?secret=" + secretkey + "&response=" + token;
-        const response = await axios.post(url);
-        if (response.data.success == false || response.data.score <= 0.4) {
-            res.send({"Error": "Unable to connect"});
-            return;
-        }
-    } catch (e) {
-        res.send({"Error": "Unable to connect"});
-        console.log(e);
-        return;
-    }
+    // try {
+    //     const secretkey = process.env.SECRET_KEY;
+    //     const token = req.body.recaptcha;
+    //     const url = "https://www.google.com/recaptcha/api/siteverify?secret=" + secretkey + "&response=" + token;
+    //     const response = await axios.post(url);
+    //     if (response.data.success == false || response.data.score <= 0.4) {
+    //         res.send({"Error": "Unable to connect"});
+    //         return;
+    //     }
+    // } catch (e) {
+    //     res.send({"Error": "Unable to connect"});
+    //     console.log(e);
+    //     return;
+    // }
     const board = req.query.b
     const title = req.body.posttitle
     const content = markdown.toHTML(req.body.postcontent)
